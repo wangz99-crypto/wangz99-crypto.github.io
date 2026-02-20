@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zhe Wang | Machine Learning & Analytics Engineer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <div class="brand">Zhe Wang</div>
+      <div class="links">
+        <a href="index.html" class="active">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <h1>Machine Learning & Analytics Engineer</h1>
+      <p class="subtitle">
+        I build reliable ML systems and analytics products—from model pipelines to dashboards—
+        with a focus on clarity, reproducibility, and real-world usability.
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="projects.html">View Projects</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2>Featured Project</h2>
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>🏠 House Prices ML System</h3>
+            <p class="muted">
+              A production-style ML project with model versioning, reliability guardrails, and a live demo app.
+            </p>
+          </div>
+          <span class="tag">ML System</span>
+        </div>
+
+        <ul class="bullets">
+          <li>Live prediction UI (no JSON)</li>
+          <li>Model versioning & reproducible runs</li>
+          <li>Data compatibility checks and reliability artifacts</li>
+        </ul>
+
+        <div class="card-actions">
+          <a class="btn primary" href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
+          <a class="btn" href="https://github.com/wangz99-crypto/house-prices-ml-pipeline" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <p class="muted">Best way to reach me:</p>
+      <div class="contact">
+        <a class="btn" href="wangz99@udayton.edu">Email</a>
+        <a class="btn" href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn" href="https://github.com/wangz99-crypto" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">© <span id="y"></span> Zhe Wang</span>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

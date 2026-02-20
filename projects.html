@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects | Zhe Wang</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <div class="brand">Zhe Wang</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="page-hero">
+      <h1>Projects</h1>
+      <p class="subtitle muted">
+        A growing collection of ML systems and analytics projects.
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid">
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>🏠 House Prices ML System</h3>
+            <p class="muted">Live demo + versioned model artifacts + reliability checks.</p>
+          </div>
+          <span class="tag">ML System</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn primary" href="YOUR_STREAMLIT_URL" target="_blank" rel="noreferrer">Live Demo</a>
+          <a class="btn" href="YOUR_GITHUB_REPO_URL" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>📊 KPI Dashboard (Power BI)</h3>
+            <p class="muted">Operational KPI validation and multi-level reporting (case study coming soon).</p>
+          </div>
+          <span class="tag">Analytics</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn" href="#" onclick="return false;">Coming soon</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>📈 Customer Churn Modeling</h3>
+            <p class="muted">Predictive modeling + business recommendations (case study coming soon).</p>
+          </div>
+          <span class="tag">ML + Business</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn" href="#" onclick="return false;">Coming soon</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">© <span id="y"></span> Zhe Wang</span>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
