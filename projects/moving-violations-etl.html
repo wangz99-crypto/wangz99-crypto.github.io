@@ -1,155 +1,178 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Automated Cloud ETL Pipeline | Zhe Wang</title>
-  <link rel="stylesheet" href="../styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Serverless Cloud Data Ingestion Pipeline</title>
+<link rel="stylesheet" href="../styles.css" />
+
+<style>
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.lightbox img {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.lightbox:target {
+  display: block;
+}
+</style>
+
 </head>
 
 <body>
 
 <header class="container">
-  <nav class="nav">
-    <div class="brand">Zhe Wang</div>
-    <div class="links">
-      <a href="../index.html">Home</a>
-      <a href="../projects.html" class="active">Projects</a>
-      <a href="../index.html#contact">Contact</a>
-    </div>
-  </nav>
+<nav class="nav">
+<div class="brand">Zhe Wang</div>
+<div class="links">
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../index.html#contact">Contact</a>
+</div>
+</nav>
 
-  <div class="page-hero">
-    <h1>☁️ Automated Cloud ETL Pipeline</h1>
-    <p class="subtitle muted">
-      Serverless AWS data ingestion architecture integrating Lambda, EventBridge,
-      RDS, and Secrets Manager for automated relational data loading.
-    </p>
-  </div>
+<div class="page-hero">
+<h1>Serverless Cloud Data Ingestion Pipeline</h1>
+<p class="subtitle muted">
+AWS Lambda–based automated ETL system with secure RDS storage and daily scheduling.
+</p>
+</div>
 </header>
 
 <main class="container">
 
-<section>
-  <h2>📌 System Overview</h2>
-  <p>
-    This project implements a production-style cloud ETL pipeline using AWS Lambda
-    for automated ingestion of external data sources into a relational RDS
-    database environment.
-  </p>
+<!-- PROJECT BACKGROUND -->
 
-  <ul class="bullets">
-    <li>Automated Lambda-based ingestion from public APIs</li>
-    <li>Scheduled orchestration via Amazon EventBridge</li>
-    <li>Secure database credentials using AWS Secrets Manager</li>
-    <li>Relational schema deployed on Amazon RDS</li>
-    <li>Incremental loading of weather and violations data</li>
-  </ul>
+<section>
+<h2>📖 Project Background</h2>
+
+<p>
+This project implements a fully automated cloud ETL pipeline integrating 
+District of Columbia Moving Violations data with Daily Weather data into a 
+MySQL relational database hosted on AWS RDS.
+</p>
+
+<p>
+Rather than focusing on analytics, the objective is to build a secure and 
+reproducible data infrastructure capable of supporting future analytical or 
+decision-support applications. The pipeline integrates:
+</p>
+
+<ul class="bullets">
+<li>Python-based ETL (local full load + Lambda incremental updates)</li>
+<li>Automated daily scheduling via EventBridge</li>
+<li>Secure credential storage using AWS Secrets Manager</li>
+<li>Relational schema deployment on AWS RDS</li>
+<li>Duplicate-safe incremental ingestion logic</li>
+</ul>
+
+<p class="muted">
+Primary data sources include DC Open Data Moving Violations (JSON API) and
+VisualCrossing Daily Weather datasets.
+</p>
 </section>
 
-<hr>
+<!-- PIPELINE ARCHITECTURE -->
 
 <section>
-  <h2>⚙️ Pipeline Architecture</h2>
+<h2>📡 Pipeline Architecture</h2>
 
-  <div class="grid">
+<div class="gallery">
 
-    <div class="card">
-      <img src="../assets/moving-etl/01_relational_data_model.png" style="width:100%">
-      <p class="muted">Relational Data Model</p>
-    </div>
+<a href="#img1">
+<img src="../assets/moving-etl/01_relational_data_model.png">
+</a>
+<div id="img1" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/01_relational_data_model.png"></a>
+</div>
 
-    <div class="card">
-      <img src="../assets/moving-etl/02_lambda_etl_functions.png" style="width:100%">
-      <p class="muted">Lambda ETL Functions</p>
-    </div>
+<a href="#img2">
+<img src="../assets/moving-etl/02_lambda_etl_functions.png">
+</a>
+<div id="img2" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/02_lambda_etl_functions.png"></a>
+</div>
 
-    <div class="card">
-      <img src="../assets/moving-etl/03_lambda_execution_weather.png" style="width:100%">
-      <p class="muted">Lambda Execution Logs (Weather)</p>
-    </div>
+<a href="#img3">
+<img src="../assets/moving-etl/03_lambda_execution_weather.png">
+</a>
+<div id="img3" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/03_lambda_execution_weather.png"></a>
+</div>
 
-    <div class="card">
-      <img src="../assets/moving-etl/04_lambda_execution_violations.png" style="width:100%">
-      <p class="muted">Lambda Execution Logs (Violations)</p>
-    </div>
+<a href="#img4">
+<img src="../assets/moving-etl/04_lambda_execution_violations.png">
+</a>
+<div id="img4" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/04_lambda_execution_violations.png"></a>
+</div>
 
-  </div>
-</section>
+<a href="#img5">
+<img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png">
+</a>
+<div id="img5" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png"></a>
+</div>
 
-<hr>
+<a href="#img6">
+<img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png">
+</a>
+<div id="img6" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png"></a>
+</div>
 
-<section>
-  <h2>⏱️ Event Scheduling</h2>
+<a href="#img7">
+<img src="../assets/moving-etl/07_secrets_manager_db_credentials.png">
+</a>
+<div id="img7" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/07_secrets_manager_db_credentials.png"></a>
+</div>
 
-  <div class="grid">
+<a href="#img8">
+<img src="../assets/moving-etl/08_rds_network_configuration.png">
+</a>
+<div id="img8" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/08_rds_network_configuration.png"></a>
+</div>
 
-    <div class="card">
-      <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png" style="width:100%">
-      <p class="muted">Weather ETL Scheduling</p>
-    </div>
+<a href="#img9">
+<img src="../assets/moving-etl/09_rds_security_group_rules.png">
+</a>
+<div id="img9" class="lightbox">
+<a href="#"><img src="../assets/moving-etl/09_rds_security_group_rules.png"></a>
+</div>
 
-    <div class="card">
-      <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png" style="width:100%">
-      <p class="muted">Violations ETL Scheduling</p>
-    </div>
-
-  </div>
-</section>
-
-<hr>
-
-<section>
-  <h2>🔐 Secure Credential Management</h2>
-
-  <div class="card">
-    <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png" style="width:100%">
-    <p class="muted">Database Credentials via AWS Secrets Manager</p>
-  </div>
-
-</section>
-
-<hr>
-
-<section>
-  <h2>🛡️ RDS Connectivity & Security</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <img src="../assets/moving-etl/08_rds_network_configuration.png" style="width:100%">
-      <p class="muted">RDS Networking Configuration</p>
-    </div>
-
-    <div class="card">
-      <img src="../assets/moving-etl/09_rds_security_group_rules.png" style="width:100%">
-      <p class="muted">RDS Security Group Rules</p>
-    </div>
-
-  </div>
-
-</section>
-
-<hr>
-
-<section>
-  <h2>📊 Outcome</h2>
-  <p>
-    The deployed system demonstrates a scalable ingestion pipeline with secure
-    credential handling and automated scheduling for relational storage. The
-    architecture reflects production-ready practices for cloud-based analytics
-    environments and supports downstream querying or decision applications.
-  </p>
+</div>
 </section>
 
 </main>
 
 <footer class="container footer">
-  <span class="muted">© <span id="y"></span> Zhe Wang</span>
+<span class="muted">© <span id="y"></span> Zhe Wang</span>
 </footer>
 
 <script>
-  document.getElementById("y").textContent = new Date().getFullYear();
+document.getElementById("y").textContent = new Date().getFullYear();
 </script>
 
 </body>
