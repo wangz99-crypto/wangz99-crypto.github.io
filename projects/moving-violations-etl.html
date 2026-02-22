@@ -27,17 +27,15 @@ decision-support applications.
 <section>
 <h2>🧱 Relational Schema Design</h2>
 
-<a href="#img1">
-<img src="../assets/moving-etl/01_relational_data_model.png" style="width:100%">
-</a>
-
-<p class="muted">
-ER diagram illustrating the relational schema linking daily weather conditions
-to moving violations via shared temporal attributes for future cross-domain analysis.
-</p>
-
-<div id="img1" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/01_relational_data_model.png"></a>
+<div class="pipeline-item">
+  <h4>Relational Data Model</h4>
+  <a href="../assets/moving-etl/01_relational_data_model.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/01_relational_data_model.png">
+  </a>
+  <p class="caption muted">
+    ER diagram illustrating the relational schema linking daily weather conditions
+    to moving violations via shared temporal attributes for future cross-domain analysis.
+  </p>
 </div>
 </section>
 
@@ -46,17 +44,15 @@ to moving violations via shared temporal attributes for future cross-domain anal
 <section>
 <h2>⚙️ Serverless ETL Functions (AWS Lambda)</h2>
 
-<a href="#img2">
-<img src="../assets/moving-etl/02_lambda_etl_functions.png" style="width:100%">
-</a>
-
-<p class="muted">
-Python-based Lambda functions responsible for incremental ingestion of both
-weather and violations datasets into the RDS-hosted MySQL database.
-</p>
-
-<div id="img2" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/02_lambda_etl_functions.png"></a>
+<div class="pipeline-item">
+  <h4>Deployed Lambda Functions</h4>
+  <a href="../assets/moving-etl/02_lambda_etl_functions.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/02_lambda_etl_functions.png">
+  </a>
+  <p class="caption muted">
+    Python-based Lambda functions responsible for incremental ingestion of both
+    weather and violations datasets into the RDS-hosted MySQL database.
+  </p>
 </div>
 </section>
 
@@ -65,30 +61,26 @@ weather and violations datasets into the RDS-hosted MySQL database.
 <section>
 <h2>📥 Lambda Execution Logs</h2>
 
-<a href="#img3">
-<img src="../assets/moving-etl/03_lambda_execution_weather.png" style="width:100%">
-</a>
-
-<p class="muted">
-Successful Lambda execution inserting daily weather records into the database
-without duplication using incremental ingestion logic.
-</p>
-
-<div id="img3" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/03_lambda_execution_weather.png"></a>
+<div class="pipeline-item">
+  <h4>Weather Ingestion Logs</h4>
+  <a href="../assets/moving-etl/03_lambda_execution_weather.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/03_lambda_execution_weather.png">
+  </a>
+  <p class="caption muted">
+    Successful Lambda execution inserting daily weather records into the database
+    without duplication using incremental ingestion logic.
+  </p>
 </div>
 
-<a href="#img4">
-<img src="../assets/moving-etl/04_lambda_execution_violations.png" style="width:100%">
-</a>
-
-<p class="muted">
-Moving violations ingestion pipeline validating new entries using primary-key
-checks before insertion.
-</p>
-
-<div id="img4" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/04_lambda_execution_violations.png"></a>
+<div class="pipeline-item">
+  <h4>Violations Ingestion Logs</h4>
+  <a href="../assets/moving-etl/04_lambda_execution_violations.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/04_lambda_execution_violations.png">
+  </a>
+  <p class="caption muted">
+    Moving violations ingestion pipeline validating new entries using primary-key
+    checks before insertion.
+  </p>
 </div>
 </section>
 
@@ -97,29 +89,25 @@ checks before insertion.
 <section>
 <h2>📅 Automated Scheduling via EventBridge</h2>
 
-<a href="#img5">
-<img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png" style="width:100%">
-</a>
-
-<p class="muted">
-Daily automated trigger for weather ingestion Lambda function using
-EventBridge scheduling.
-</p>
-
-<div id="img5" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png"></a>
+<div class="pipeline-item">
+  <h4>Weather Pipeline Schedule</h4>
+  <a href="../assets/moving-etl/05_eventbridge_pipeline_weather.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png">
+  </a>
+  <p class="caption muted">
+    Daily automated trigger for weather ingestion Lambda function using
+    EventBridge scheduling.
+  </p>
 </div>
 
-<a href="#img6">
-<img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png" style="width:100%">
-</a>
-
-<p class="muted">
-EventBridge rule scheduling incremental violation updates without manual intervention.
-</p>
-
-<div id="img6" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png"></a>
+<div class="pipeline-item">
+  <h4>Violations Pipeline Schedule</h4>
+  <a href="../assets/moving-etl/06_eventbridge_pipeline_violations.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png">
+  </a>
+  <p class="caption muted">
+    EventBridge rule scheduling incremental violation updates without manual intervention.
+  </p>
 </div>
 </section>
 
@@ -128,17 +116,15 @@ EventBridge rule scheduling incremental violation updates without manual interve
 <section>
 <h2>🔐 Secure Credential Management</h2>
 
-<a href="#img7">
-<img src="../assets/moving-etl/07_secrets_manager_db_credentials.png" style="width:100%">
-</a>
-
-<p class="muted">
-AWS Secrets Manager used to securely store database credentials and prevent
-hardcoding of sensitive information in Lambda deployment packages.
-</p>
-
-<div id="img7" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/07_secrets_manager_db_credentials.png"></a>
+<div class="pipeline-item">
+  <h4>AWS Secrets Manager Configuration</h4>
+  <a href="../assets/moving-etl/07_secrets_manager_db_credentials.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png">
+  </a>
+  <p class="caption muted">
+    AWS Secrets Manager used to securely store database credentials and prevent
+    hardcoding of sensitive information in Lambda deployment packages.
+  </p>
 </div>
 </section>
 
@@ -147,30 +133,26 @@ hardcoding of sensitive information in Lambda deployment packages.
 <section>
 <h2>🌐 RDS Network Configuration</h2>
 
-<a href="#img8">
-<img src="../assets/moving-etl/08_rds_network_configuration.png" style="width:100%">
-</a>
-
-<p class="muted">
-MySQL database deployed within a VPC-enabled AWS RDS instance with controlled
-subnet access.
-</p>
-
-<div id="img8" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/08_rds_network_configuration.png"></a>
+<div class="pipeline-item">
+  <h4>VPC & Subnet Configuration</h4>
+  <a href="../assets/moving-etl/08_rds_network_configuration.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/08_rds_network_configuration.png">
+  </a>
+  <p class="caption muted">
+    MySQL database deployed within a VPC-enabled AWS RDS instance with controlled
+    subnet access.
+  </p>
 </div>
 
-<a href="#img9">
-<img src="../assets/moving-etl/09_rds_security_group_rules.png" style="width:100%">
-</a>
-
-<p class="muted">
-Inbound and outbound rules configured via Security Groups to regulate
-Lambda-to-RDS communication.
-</p>
-
-<div id="img9" class="lightbox">
-<a href="#"><img src="../assets/moving-etl/09_rds_security_group_rules.png"></a>
+<div class="pipeline-item">
+  <h4>Security Group Rules</h4>
+  <a href="../assets/moving-etl/09_rds_security_group_rules.png" class="lightbox" target="_blank">
+    <img src="../assets/moving-etl/09_rds_security_group_rules.png">
+  </a>
+  <p class="caption muted">
+    Inbound and outbound rules configured via Security Groups to regulate
+    Lambda-to-RDS communication.
+  </p>
 </div>
 </section>
 
