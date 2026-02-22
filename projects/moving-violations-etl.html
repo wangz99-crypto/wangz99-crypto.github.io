@@ -3,133 +3,154 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects | Zhe Wang</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Automated Cloud ETL Pipeline | Zhe Wang</title>
+  <link rel="stylesheet" href="../styles.css" />
 </head>
+
 <body>
-  <header class="container">
-    <nav class="nav">
-      <div class="brand">Zhe Wang</div>
-      <div class="links">
-        <a href="index.html">Home</a>
-        <a href="projects.html" class="active">Projects</a>
-        <a href="index.html#contact">Contact</a>
-      </div>
-    </nav>
 
-    <div class="page-hero">
-      <h1>Projects</h1>
-      <p class="subtitle muted">
-        Systems-focused projects spanning data infrastructure,
-        machine learning pipelines, and decision support applications.
-      </p>
+<header class="container">
+  <nav class="nav">
+    <div class="brand">Zhe Wang</div>
+    <div class="links">
+      <a href="../index.html">Home</a>
+      <a href="../projects.html" class="active">Projects</a>
+      <a href="../index.html#contact">Contact</a>
     </div>
-  </header>
+  </nav>
 
-  <main class="container">
-    <section class="grid">
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>🏠 House Prices ML System</h3>
-            <p class="muted">
-              Production-style ML pipeline with model versioning,
-              reproducible training workflows, and deployment-ready artifacts.
-            </p>
-          </div>
-          <span class="tag">ML Pipeline</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn primary" href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
-          <a class="btn" href="https://github.com/wangz99-crypto/house-prices-ml-pipeline" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
-      </div>
+  <div class="page-hero">
+    <h1>☁️ Automated Cloud ETL Pipeline</h1>
+    <p class="subtitle muted">
+      Serverless AWS data ingestion architecture integrating Lambda, EventBridge,
+      RDS, and Secrets Manager for automated relational data loading.
+    </p>
+  </div>
+</header>
 
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>📊 KPI Dashboard (Power BI)</h3>
-            <p class="muted">
-              Enterprise KPI validation and multi-level operational reporting
-              for monthly performance review workflows.
-            </p>
-          </div>
-          <span class="tag">Decision System</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn" href="#" onclick="return false;">Coming soon</a>
-        </div>
-      </div>
+<main class="container">
 
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>📡 Telecom Customer Churn Prediction</h3>
-            <p class="muted">
-              End-to-end customer risk scoring system combining
-              predictive modeling, business interpretation,
-              and interactive decision support via Shiny.
-            </p>
-          </div>
-          <span class="tag">Decision App</span>
-        </div>
+<section>
+  <h2>📌 System Overview</h2>
+  <p>
+    This project implements a production-style cloud ETL pipeline using AWS Lambda
+    for automated ingestion of external data sources into a relational RDS
+    database environment.
+  </p>
 
-        <ul class="bullets">
-          <li>Customer churn risk scoring via probabilistic modeling</li>
-          <li>Threshold-based retention strategy evaluation</li>
-          <li>Interactive incentive planning interface</li>
-        </ul>
+  <ul class="bullets">
+    <li>Automated Lambda-based ingestion from public APIs</li>
+    <li>Scheduled orchestration via Amazon EventBridge</li>
+    <li>Secure database credentials using AWS Secrets Manager</li>
+    <li>Relational schema deployed on Amazon RDS</li>
+    <li>Incremental loading of weather and violations data</li>
+  </ul>
+</section>
 
-        <div class="card-actions">
-          <a class="btn primary"
-            href="https://victorwang.shinyapps.io/telco-churn-demo/"
-            target="_blank" rel="noreferrer">
-            Live App
-          </a>
+<hr>
 
-          <a class="btn"
-            href="reports/telecom-churn-report.html"
-            target="_blank" rel="noreferrer">
-            Full Report
-          </a>
-        </div>
-      </div>
+<section>
+  <h2>⚙️ Pipeline Architecture</h2>
 
-      <!-- 更新后的卡片：☁️ Automated Cloud ETL Pipeline (符合新描述和按钮) -->
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>☁️ Automated Cloud ETL Pipeline</h3>
-            <p class="muted">
-              AWS Lambda–based daily ingestion pipeline with secure RDS storage,
-              automated scheduling, and incremental loading.
-            </p>
-          </div>
-          <span class="tag">Data Platform</span>
-        </div>
+  <div class="grid">
 
-        <ul class="bullets">
-          <li>Relational schema for weather ↔ violations</li>
-          <li>EventBridge-triggered Lambda ETL</li>
-          <li>Secrets Manager–secured DB access</li>
-        </ul>
+    <div class="card">
+      <img src="../assets/moving-etl/01_relational_data_model.png" style="width:100%">
+      <p class="muted">Relational Data Model</p>
+    </div>
 
-        <div class="card-actions">
-          <a class="btn primary"
-             href="projects/moving-violations-etl.html">
-             Project Page
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
+    <div class="card">
+      <img src="../assets/moving-etl/02_lambda_etl_functions.png" style="width:100%">
+      <p class="muted">Lambda ETL Functions</p>
+    </div>
 
-  <footer class="container footer">
-    <span class="muted">© <span id="y"></span> Zhe Wang</span>
-  </footer>
+    <div class="card">
+      <img src="../assets/moving-etl/03_lambda_execution_weather.png" style="width:100%">
+      <p class="muted">Lambda Execution Logs (Weather)</p>
+    </div>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+    <div class="card">
+      <img src="../assets/moving-etl/04_lambda_execution_violations.png" style="width:100%">
+      <p class="muted">Lambda Execution Logs (Violations)</p>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <h2>⏱️ Event Scheduling</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png" style="width:100%">
+      <p class="muted">Weather ETL Scheduling</p>
+    </div>
+
+    <div class="card">
+      <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png" style="width:100%">
+      <p class="muted">Violations ETL Scheduling</p>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <h2>🔐 Secure Credential Management</h2>
+
+  <div class="card">
+    <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png" style="width:100%">
+    <p class="muted">Database Credentials via AWS Secrets Manager</p>
+  </div>
+
+</section>
+
+<hr>
+
+<section>
+  <h2>🛡️ RDS Connectivity & Security</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="../assets/moving-etl/08_rds_network_configuration.png" style="width:100%">
+      <p class="muted">RDS Networking Configuration</p>
+    </div>
+
+    <div class="card">
+      <img src="../assets/moving-etl/09_rds_security_group_rules.png" style="width:100%">
+      <p class="muted">RDS Security Group Rules</p>
+    </div>
+
+  </div>
+
+</section>
+
+<hr>
+
+<section>
+  <h2>📊 Outcome</h2>
+  <p>
+    The deployed system demonstrates a scalable ingestion pipeline with secure
+    credential handling and automated scheduling for relational storage. The
+    architecture reflects production-ready practices for cloud-based analytics
+    environments and supports downstream querying or decision applications.
+  </p>
+</section>
+
+</main>
+
+<footer class="container footer">
+  <span class="muted">© <span id="y"></span> Zhe Wang</span>
+</footer>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
