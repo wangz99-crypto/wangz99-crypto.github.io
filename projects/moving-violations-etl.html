@@ -6,10 +6,9 @@
   <title>Serverless Cloud ETL Pipeline | Zhe Wang</title>
   <link rel="stylesheet" href="../styles.css" />
 
-  <!-- Page-local styles to keep the "first version" card size,
-       while enabling click-to-zoom without breaking your site CSS. -->
+  <!-- Page-local styles (stable across GitHub Pages) -->
   <style>
-    /* Keep thumbnails "comfortable" like your first version */
+    /* Comfortable thumbnails like your first version */
     .etl-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -27,8 +26,8 @@
 
     .etl-card img {
       width: 100%;
-      height: 220px;              /* controls the thumbnail size */
-      object-fit: contain;        /* keep full image visible */
+      height: 250px;             /* thumbnail size */
+      object-fit: contain;       /* show full image */
       border-radius: 10px;
       background: #fafafa;
       cursor: zoom-in;
@@ -54,51 +53,6 @@
       border-top: 1px solid rgba(0,0,0,0.08);
     }
 
-    /* Lightbox (click to open, click background to close) */
-    .lb {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.88);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      z-index: 9999;
-    }
-
-    .lb:target {
-      display: flex;
-    }
-
-    .lb-inner {
-      max-width: 92vw;
-      max-height: 86vh;
-    }
-
-    .lb-inner img {
-      max-width: 92vw;
-      max-height: 86vh;
-      width: auto;
-      height: auto;
-      display: block;
-      border-radius: 10px;
-      background: #111;
-    }
-
-    .lb-hint {
-      margin-top: 10px;
-      text-align: center;
-      color: rgba(255,255,255,0.78);
-      font-size: 0.95rem;
-    }
-
-    /* Make the full image clickable to close */
-    .lb-close-area {
-      position: absolute;
-      inset: 0;
-    }
-
-    /* Small badge row if you want */
     .mini-tags {
       display: flex;
       gap: 8px;
@@ -113,6 +67,50 @@
       background: rgba(0,0,0,0.05);
       font-size: 0.9rem;
       color: rgba(0,0,0,0.7);
+    }
+
+    /* Lightbox (JS-controlled, no hash => no scroll jump) */
+    .lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+    }
+
+    .lb.show {
+      display: flex;
+    }
+
+    .lb-inner {
+      max-width: 92vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lb-inner img {
+      max-width: 92vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      background: #111;
+    }
+
+    .lb-hint {
+      text-align: center;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.95rem;
+      user-select: none;
     }
   </style>
 </head>
@@ -141,6 +139,7 @@
         <span class="mini-tag">RDS (MySQL)</span>
         <span class="mini-tag">Secrets Manager</span>
         <span class="mini-tag">Incremental Load</span>
+        <span class="mini-tag">Idempotent</span>
       </div>
     </div>
   </header>
@@ -156,18 +155,18 @@
       </p>
 
       <p>
-        The goal is not analytics. The goal is a robust cloud data storage and update environment that enables
+        The goal is not analytics. The objective is a robust cloud data storage and update environment that enables
         accurate downstream analysis later (without manual refresh, duplicate inserts, or exposed credentials).
       </p>
 
       <ul class="bullets">
-        <li>MySQL schema + ERD design</li>
-        <li>Table creation SQL + primary key strategy</li>
+        <li>MySQL database schema & ERD</li>
+        <li>Table creation SQL</li>
         <li>Python ETL (local full load + AWS Lambda incremental load)</li>
-        <li>Automated daily scheduling via EventBridge</li>
-        <li>Secure credential handling via Secrets Manager</li>
-        <li>Cloud database hosting on AWS RDS</li>
-        <li>Duplicate-safe ingestion (no repeated inserts)</li>
+        <li>Automated daily updates using EventBridge</li>
+        <li>Secure credential management via Secrets Manager</li>
+        <li>RDS cloud database hosting</li>
+        <li>Reproducibility with duplicate-safe ingestion</li>
       </ul>
     </section>
 
@@ -181,105 +180,105 @@
         <li>Dataset: Moving Violations Issued (JSON API with pagination)</li>
         <li>Updated daily</li>
         <li>Primary key: <code>violation_id</code></li>
-        <li>Key fields: issuing agency, fine amount, violation time, coordinates, description, accident indicator</li>
+        <li>Fields include: issuing agency, fine amount, violation time, coordinates, description, accident indicator</li>
       </ul>
 
       <h3>2.2 Weather (VisualCrossing Daily Weather)</h3>
       <ul class="bullets">
-        <li>Daily weather ingestion (limited free tier often requires day-by-day pulls)</li>
+        <li>Daily weather ingestion (free tier often requires day-by-day pulls)</li>
         <li>Primary key: <code>weather_date</code></li>
-        <li>Key fields: precipitation, max/min temperature, humidity, wind speed, conditions, rainfall indicator</li>
+        <li>Fields include: precipitation, max/min temperature, humidity, wind speed, conditions, rainfall indicator</li>
       </ul>
     </section>
 
     <hr class="section-divider" />
 
     <section>
-      <h2>3) Evidence Gallery (Click any image to zoom)</h2>
+      <h2>3) Evidence Gallery (Click to zoom)</h2>
       <p class="muted">
-        The screenshots below document the deployed pipeline components and operational proof (schema, Lambda runs,
-        scheduling, and cloud security configuration).
+        The screenshots below document the deployed pipeline components and operational proof
+        (schema, Lambda runs, scheduling, and cloud security configuration).
       </p>
 
       <div class="etl-grid">
 
-        <!-- 1 -->
         <div class="etl-card">
-          <a href="#lb1">
-            <img src="../assets/moving-etl/01_relational_data_model.png" alt="Relational Data Model">
-          </a>
+          <img src="../assets/moving-etl/01_relational_data_model.png"
+               alt="Relational Data Model"
+               data-full="../assets/moving-etl/01_relational_data_model.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Relational Data Model</div>
           <p class="etl-caption">MySQL schema linking weather and violations with clear keys to support future joins.</p>
         </div>
 
-        <!-- 2 -->
         <div class="etl-card">
-          <a href="#lb2">
-            <img src="../assets/moving-etl/02_lambda_etl_functions.png" alt="Lambda ETL Functions">
-          </a>
+          <img src="../assets/moving-etl/02_lambda_etl_functions.png"
+               alt="Lambda ETL Functions"
+               data-full="../assets/moving-etl/02_lambda_etl_functions.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Lambda ETL Functions</div>
           <p class="etl-caption">Two serverless functions for incremental ingestion of weather and violations datasets.</p>
         </div>
 
-        <!-- 3 -->
         <div class="etl-card">
-          <a href="#lb3">
-            <img src="../assets/moving-etl/03_lambda_execution_weather.png" alt="Lambda Execution Logs Weather">
-          </a>
+          <img src="../assets/moving-etl/03_lambda_execution_weather.png"
+               alt="Lambda Execution Logs Weather"
+               data-full="../assets/moving-etl/03_lambda_execution_weather.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Execution Logs (Weather)</div>
           <p class="etl-caption">Run proof showing ingestion behavior and safe insert logic for daily weather updates.</p>
         </div>
 
-        <!-- 4 -->
         <div class="etl-card">
-          <a href="#lb4">
-            <img src="../assets/moving-etl/04_lambda_execution_violations.png" alt="Lambda Execution Logs Violations">
-          </a>
+          <img src="../assets/moving-etl/04_lambda_execution_violations.png"
+               alt="Lambda Execution Logs Violations"
+               data-full="../assets/moving-etl/04_lambda_execution_violations.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Execution Logs (Violations)</div>
           <p class="etl-caption">Run proof for violations ingestion with primary-key checks to prevent duplicates.</p>
         </div>
 
-        <!-- 5 -->
         <div class="etl-card">
-          <a href="#lb5">
-            <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png" alt="EventBridge Weather Schedule">
-          </a>
+          <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png"
+               alt="EventBridge Weather Schedule"
+               data-full="../assets/moving-etl/05_eventbridge_pipeline_weather.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">EventBridge Trigger (Weather)</div>
           <p class="etl-caption">Automated daily schedule triggering the weather ETL Lambda function.</p>
         </div>
 
-        <!-- 6 -->
         <div class="etl-card">
-          <a href="#lb6">
-            <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png" alt="EventBridge Violations Schedule">
-          </a>
+          <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png"
+               alt="EventBridge Violations Schedule"
+               data-full="../assets/moving-etl/06_eventbridge_pipeline_violations.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">EventBridge Trigger (Violations)</div>
           <p class="etl-caption">Automated schedule for the violations ETL Lambda function (no manual refresh needed).</p>
         </div>
 
-        <!-- 7 -->
         <div class="etl-card">
-          <a href="#lb7">
-            <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png" alt="Secrets Manager Credentials">
-          </a>
+          <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png"
+               alt="Secrets Manager Credentials"
+               data-full="../assets/moving-etl/07_secrets_manager_db_credentials.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Secrets Manager</div>
           <p class="etl-caption">Database credentials stored securely—no hardcoded secrets inside Lambda packages.</p>
         </div>
 
-        <!-- 8 -->
         <div class="etl-card">
-          <a href="#lb8">
-            <img src="../assets/moving-etl/08_rds_network_configuration.png" alt="RDS Network Configuration">
-          </a>
+          <img src="../assets/moving-etl/08_rds_network_configuration.png"
+               alt="RDS Network Configuration"
+               data-full="../assets/moving-etl/08_rds_network_configuration.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">RDS Connectivity / Networking</div>
-          <p class="etl-caption">RDS endpoint and VPC networking configuration supporting controlled access.</p>
+          <p class="etl-caption">RDS deployed with VPC networking configuration supporting controlled access.</p>
         </div>
 
-        <!-- 9 -->
         <div class="etl-card">
-          <a href="#lb9">
-            <img src="../assets/moving-etl/09_rds_security_group_rules.png" alt="RDS Security Group Rules">
-          </a>
+          <img src="../assets/moving-etl/09_rds_security_group_rules.png"
+               alt="RDS Security Group Rules"
+               data-full="../assets/moving-etl/09_rds_security_group_rules.png"
+               onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Security Group Rules</div>
           <p class="etl-caption">Inbound/outbound rules governing database access and service communication paths.</p>
         </div>
@@ -295,7 +294,7 @@
         <li><strong>Automated daily ETL</strong> for both datasets using EventBridge + Lambda</li>
         <li><strong>Cloud-hosted relational storage</strong> on AWS RDS (MySQL)</li>
         <li><strong>Secure credential handling</strong> through AWS Secrets Manager</li>
-        <li><strong>Incremental load design</strong> that avoids duplicate inserts</li>
+        <li><strong>Incremental + idempotent ingestion</strong> design that avoids duplicate inserts</li>
         <li><strong>Reproducible pipeline setup</strong> enabling reliable downstream analysis later</li>
       </ul>
 
@@ -313,78 +312,34 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    function openLightbox(src) {
+      const lb = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      img.src = src;
+      lb.classList.add("show");
+      document.body.style.overflow = "hidden"; // prevent background scroll
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      lb.classList.remove("show");
+      img.src = "";
+      document.body.style.overflow = ""; // restore scroll
+    }
+
+    // close on ESC
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
   </script>
 
-  <!-- Lightboxes (full-size view) -->
-  <div id="lb1" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/01_relational_data_model.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb2" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/02_lambda_etl_functions.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb3" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/03_lambda_execution_weather.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb4" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/04_lambda_execution_violations.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb5" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb6" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb7" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb8" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/08_rds_network_configuration.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
-    </div>
-  </div>
-
-  <div id="lb9" class="lb">
-    <a class="lb-close-area" href="#"></a>
-    <div class="lb-inner">
-      <img src="../assets/moving-etl/09_rds_security_group_rules.png" alt="">
-      <div class="lb-hint">Click anywhere to close</div>
+  <!-- Single global lightbox (no hash => no scroll jump) -->
+  <div id="lightbox" class="lb" onclick="closeLightbox()">
+    <div class="lb-inner" onclick="event.stopPropagation()">
+      <img id="lightbox-img" alt="Zoomed image">
+      <div class="lb-hint">Click outside the image (or press ESC) to close</div>
     </div>
   </div>
 
