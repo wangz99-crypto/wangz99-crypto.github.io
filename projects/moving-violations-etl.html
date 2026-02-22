@@ -3,231 +3,125 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Automated Cloud ETL Pipeline | Zhe Wang</title>
-  <link rel="stylesheet" href="../styles.css" />
+  <title>Projects | Zhe Wang</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="container">
     <nav class="nav">
       <div class="brand">Zhe Wang</div>
       <div class="links">
-        <a href="../index.html">Home</a>
-        <a href="../projects.html" class="active">Projects</a>
-        <a href="../index.html#contact">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="index.html#contact">Contact</a>
       </div>
     </nav>
 
     <div class="page-hero">
-      <h1>☁️ Automated Cloud ETL Pipeline</h1>
+      <h1>Projects</h1>
       <p class="subtitle muted">
-        AWS Lambda · EventBridge · RDS (MySQL) · Secrets Manager · Relational Modeling
+        Systems-focused projects spanning data infrastructure,
+        machine learning pipelines, and decision support applications.
       </p>
     </div>
   </header>
 
   <main class="container">
-
-    <!-- ===================== Summary ===================== -->
-    <section class="card" style="margin-bottom:16px;">
-      <div class="card-top">
-        <div>
-          <h3>Project Summary</h3>
-          <p class="muted" style="margin-top:6px;">
-            I built a cloud-hosted ETL pipeline that loads DC moving violations and daily weather into
-            an AWS RDS (MySQL) database. The pipeline supports automated daily runs, secure secrets
-            handling, and idempotent incremental updates (safe to re-run without duplicates).
-          </p>
+    <section class="grid">
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>🏠 House Prices ML System</h3>
+            <p class="muted">
+              Production-style ML pipeline with model versioning,
+              reproducible training workflows, and deployment-ready artifacts.
+            </p>
+          </div>
+          <span class="tag">ML Pipeline</span>
         </div>
-        <span class="tag">Data Platform</span>
+        <div class="card-actions">
+          <a class="btn primary" href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
+          <a class="btn" href="https://github.com/wangz99-crypto/house-prices-ml-pipeline" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
       </div>
 
-      <ul class="bullets">
-        <li><b>Relational design</b>: Weather and violations tables joined by date for analytics-ready queries</li>
-        <li><b>Automation</b>: EventBridge triggers Lambda for scheduled ingestion</li>
-        <li><b>Reliability</b>: Incremental logic inserts <b>0</b> rows when no new data is available (idempotent)</li>
-        <li><b>Security</b>: DB credentials stored in AWS Secrets Manager (no hard-coded secrets)</li>
-      </ul>
-
-      <div class="card-actions">
-        <a class="btn" href="../projects.html">← Back to Projects</a>
-      </div>
-    </section>
-
-    <!-- ===================== Evidence Grid ===================== -->
-    <section class="card" style="margin-bottom:16px;">
-      <div class="card-top">
-        <div>
-          <h3>Engineering Evidence</h3>
-          <p class="muted" style="margin-top:6px;">
-            Screenshots below show the data model, deployed cloud components, scheduled automation,
-            idempotent execution behavior, and secure database access configuration.
-          </p>
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>📊 KPI Dashboard (Power BI)</h3>
+            <p class="muted">
+              Enterprise KPI validation and multi-level operational reporting
+              for monthly performance review workflows.
+            </p>
+          </div>
+          <span class="tag">Decision System</span>
         </div>
-        <span class="tag">A</span>
+        <div class="card-actions">
+          <a class="btn" href="#" onclick="return false;">Coming soon</a>
+        </div>
       </div>
 
-      <div class="grid" style="margin-top:12px;">
-
-        <div class="card">
-          <h3>✅ Relational Data Model</h3>
-          <p class="muted">Two core tables linked by date to enable weather ↔ violations analysis.</p>
-          <img
-            src="../assets/moving-etl/01_relational_data_model.png"
-            alt="Relational data model"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>📡 Telecom Customer Churn Prediction</h3>
+            <p class="muted">
+              End-to-end customer risk scoring system combining
+              predictive modeling, business interpretation,
+              and interactive decision support via Shiny.
+            </p>
+          </div>
+          <span class="tag">Decision App</span>
         </div>
 
-        <div class="card">
-          <h3>✅ Deployed Lambda ETL Functions</h3>
-          <p class="muted">Daily ETL functions packaged and deployed to AWS Lambda.</p>
-          <img
-            src="../assets/moving-etl/02_lambda_etl_functions.png"
-            alt="Lambda functions list"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
-        </div>
+        <ul class="bullets">
+          <li>Customer churn risk scoring via probabilistic modeling</li>
+          <li>Threshold-based retention strategy evaluation</li>
+          <li>Interactive incentive planning interface</li>
+        </ul>
 
-        <div class="card">
-          <h3>✅ Scheduled Automation (EventBridge → Lambda)</h3>
-          <p class="muted">EventBridge trigger configured to run the pipeline automatically.</p>
-          <img
-            src="../assets/moving-etl/05_eventbridge_pipeline_weather.png"
-            alt="EventBridge trigger diagram (weather)"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
-        </div>
+        <div class="card-actions">
+          <a class="btn primary"
+            href="https://victorwang.shinyapps.io/telco-churn-demo/"
+            target="_blank" rel="noreferrer">
+            Live App
+          </a>
 
-        <div class="card">
-          <h3>✅ Scheduled Automation (Second Function)</h3>
-          <p class="muted">A second scheduled ETL function for the complementary ingestion workflow.</p>
-          <img
-            src="../assets/moving-etl/06_eventbridge_pipeline_violations.png"
-            alt="EventBridge trigger diagram (violations)"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
+          <a class="btn"
+            href="reports/telecom-churn-report.html"
+            target="_blank" rel="noreferrer">
+            Full Report
+          </a>
         </div>
-
-        <div class="card">
-          <h3>✅ Idempotent Execution (Weather)</h3>
-          <p class="muted">
-            Re-running the job inserts <b>0</b> rows when there is no new daily data (duplicate-safe).
-          </p>
-          <img
-            src="../assets/moving-etl/03_lambda_execution_weather.png"
-            alt="Lambda execution log (weather)"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
-        </div>
-
-        <div class="card">
-          <h3>✅ Idempotent Execution (Violations)</h3>
-          <p class="muted">
-            Incremental logic prevents duplicate insertion on re-runs (0 new rows when unchanged).
-          </p>
-          <img
-            src="../assets/moving-etl/04_lambda_execution_violations.png"
-            alt="Lambda execution log (violations)"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
-        </div>
-
-        <div class="card">
-          <h3>✅ Secrets Manager</h3>
-          <p class="muted">Database credentials stored securely (sensitive fields redacted).</p>
-          <img
-            src="../assets/moving-etl/07_secrets_manager_db_credentials.png"
-            alt="Secrets Manager screenshot"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
-        </div>
-
-        <div class="card">
-          <h3>✅ RDS Network Configuration</h3>
-          <p class="muted">RDS connectivity settings validated (sensitive identifiers redacted).</p>
-          <img
-            src="../assets/moving-etl/08_rds_network_configuration.png"
-            alt="RDS connectivity and security"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
-        </div>
-
-        <div class="card">
-          <h3>✅ Security Group Rules</h3>
-          <p class="muted">Inbound/outbound rules configured for DB access (sensitive values redacted).</p>
-          <img
-            src="../assets/moving-etl/09_rds_security_group_rules.png"
-            alt="Security group rules"
-            style="width:100%; border-radius:12px; margin-top:10px;"
-          />
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===================== How it works ===================== -->
-    <section class="card" style="margin-bottom:16px;">
-      <div class="card-top">
-        <div>
-          <h3>How the Pipeline Works</h3>
-          <p class="muted" style="margin-top:6px;">
-            This system follows a production-style pattern: define a clean relational schema,
-            establish secure DB access, and automate incremental ingestion on a schedule.
-          </p>
-        </div>
-        <span class="tag">Design</span>
       </div>
 
-      <div class="grid" style="margin-top:12px;">
-        <div class="card">
-          <h3>Ingestion</h3>
-          <ul class="bullets">
-            <li>Fetch violations and weather data</li>
-            <li>Transform to a consistent schema</li>
-            <li>Insert into MySQL tables</li>
-          </ul>
+      <!-- 更新后的卡片：☁️ Automated Cloud ETL Pipeline (符合新描述和按钮) -->
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <h3>☁️ Automated Cloud ETL Pipeline</h3>
+            <p class="muted">
+              AWS Lambda–based daily ingestion pipeline with secure RDS storage,
+              automated scheduling, and incremental loading.
+            </p>
+          </div>
+          <span class="tag">Data Platform</span>
         </div>
 
-        <div class="card">
-          <h3>Incremental + Idempotent</h3>
-          <ul class="bullets">
-            <li>Compute a date window for new records</li>
-            <li>Use keys/logic to avoid duplicates</li>
-            <li>Safe to re-run (“0 rows inserted” when unchanged)</li>
-          </ul>
-        </div>
+        <ul class="bullets">
+          <li>Relational schema for weather ↔ violations</li>
+          <li>EventBridge-triggered Lambda ETL</li>
+          <li>Secrets Manager–secured DB access</li>
+        </ul>
 
-        <div class="card">
-          <h3>Security + Ops</h3>
-          <ul class="bullets">
-            <li>DB credentials stored in Secrets Manager</li>
-            <li>RDS access controlled via VPC + security groups</li>
-            <li>EventBridge schedule triggers Lambda runs</li>
-          </ul>
+        <div class="card-actions">
+          <a class="btn primary"
+             href="projects/moving-violations-etl.html">
+             Project Page
+          </a>
         </div>
       </div>
     </section>
-
-    <!-- ===================== Next steps ===================== -->
-    <section class="card">
-      <div class="card-top">
-        <div>
-          <h3>What I Would Add Next</h3>
-          <p class="muted" style="margin-top:6px;">
-            If this were deployed as a public-facing service, I would expose curated query endpoints
-            (no raw SQL input), add authentication + rate limiting, and include data quality checks.
-          </p>
-        </div>
-        <span class="tag">Next</span>
-      </div>
-
-      <ul class="bullets">
-        <li>API layer (curated endpoints) instead of direct DB access</li>
-        <li>Auth + rate limiting + monitoring for operational safety</li>
-        <li>Data quality checks and automated alerting for failed runs</li>
-      </ul>
-    </section>
-
   </main>
 
   <footer class="container footer">
