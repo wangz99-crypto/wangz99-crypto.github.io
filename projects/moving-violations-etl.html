@@ -1,177 +1,392 @@
-<section>
-<h2>📖 Project Background</h2>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Serverless Cloud ETL Pipeline | Zhe Wang</title>
+  <link rel="stylesheet" href="../styles.css" />
 
-<p>
-This project implements a fully automated cloud ETL pipeline integrating 
-District of Columbia Moving Violations data with Daily Weather data into a 
-MySQL relational database hosted on AWS RDS.
-</p>
+  <!-- Page-local styles to keep the "first version" card size,
+       while enabling click-to-zoom without breaking your site CSS. -->
+  <style>
+    /* Keep thumbnails "comfortable" like your first version */
+    .etl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
 
-<p>
-Rather than focusing on analytics, the objective is to build a secure and 
-reproducible data infrastructure capable of supporting future analytical or 
-decision-support applications.
-</p>
+    .etl-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+    }
 
-<ul class="bullets">
-<li>Python-based ETL (local full load + Lambda incremental updates)</li>
-<li>Automated daily scheduling via EventBridge</li>
-<li>Secure credential storage using AWS Secrets Manager</li>
-<li>Relational schema deployment on AWS RDS</li>
-<li>Duplicate-safe incremental ingestion logic</li>
-</ul>
-</section>
+    .etl-card img {
+      width: 100%;
+      height: 220px;              /* controls the thumbnail size */
+      object-fit: contain;        /* keep full image visible */
+      border-radius: 10px;
+      background: #fafafa;
+      cursor: zoom-in;
+      display: block;
+    }
 
-<hr>
+    .etl-title {
+      margin: 10px 0 4px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
 
-<section>
-<h2>🧱 Relational Schema Design</h2>
+    .etl-caption {
+      margin: 0;
+      color: rgba(0,0,0,0.62);
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
 
-<div class="pipeline-item">
-  <h4>Relational Data Model</h4>
-  <a href="../assets/moving-etl/01_relational_data_model.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/01_relational_data_model.png">
-  </a>
-  <p class="caption muted">
-    ER diagram illustrating the relational schema linking daily weather conditions
-    to moving violations via shared temporal attributes for future cross-domain analysis.
-  </p>
-</div>
-</section>
+    .section-divider {
+      margin: 22px 0;
+      border: 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
 
-<hr>
+    /* Lightbox (click to open, click background to close) */
+    .lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+    }
 
-<section>
-<h2>⚙️ Serverless ETL Functions (AWS Lambda)</h2>
+    .lb:target {
+      display: flex;
+    }
 
-<div class="pipeline-item">
-  <h4>Deployed Lambda Functions</h4>
-  <a href="../assets/moving-etl/02_lambda_etl_functions.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/02_lambda_etl_functions.png">
-  </a>
-  <p class="caption muted">
-    Python-based Lambda functions responsible for incremental ingestion of both
-    weather and violations datasets into the RDS-hosted MySQL database.
-  </p>
-</div>
-</section>
+    .lb-inner {
+      max-width: 92vw;
+      max-height: 86vh;
+    }
 
-<hr>
+    .lb-inner img {
+      max-width: 92vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      background: #111;
+    }
 
-<section>
-<h2>📥 Lambda Execution Logs</h2>
+    .lb-hint {
+      margin-top: 10px;
+      text-align: center;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.95rem;
+    }
 
-<div class="pipeline-item">
-  <h4>Weather Ingestion Logs</h4>
-  <a href="../assets/moving-etl/03_lambda_execution_weather.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/03_lambda_execution_weather.png">
-  </a>
-  <p class="caption muted">
-    Successful Lambda execution inserting daily weather records into the database
-    without duplication using incremental ingestion logic.
-  </p>
-</div>
+    /* Make the full image clickable to close */
+    .lb-close-area {
+      position: absolute;
+      inset: 0;
+    }
 
-<div class="pipeline-item">
-  <h4>Violations Ingestion Logs</h4>
-  <a href="../assets/moving-etl/04_lambda_execution_violations.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/04_lambda_execution_violations.png">
-  </a>
-  <p class="caption muted">
-    Moving violations ingestion pipeline validating new entries using primary-key
-    checks before insertion.
-  </p>
-</div>
-</section>
+    /* Small badge row if you want */
+    .mini-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
 
-<hr>
+    .mini-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.05);
+      font-size: 0.9rem;
+      color: rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
 
-<section>
-<h2>📅 Automated Scheduling via EventBridge</h2>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <div class="brand">Zhe Wang</div>
+      <div class="links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html" class="active">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </div>
+    </nav>
 
-<div class="pipeline-item">
-  <h4>Weather Pipeline Schedule</h4>
-  <a href="../assets/moving-etl/05_eventbridge_pipeline_weather.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png">
-  </a>
-  <p class="caption muted">
-    Daily automated trigger for weather ingestion Lambda function using
-    EventBridge scheduling.
-  </p>
-</div>
+    <div class="page-hero">
+      <h1>☁️ Serverless Cloud ETL Pipeline</h1>
+      <p class="subtitle muted">
+        Automated ingestion pipeline integrating DC Moving Violations + Daily Weather into MySQL on AWS RDS
+        with Lambda, EventBridge scheduling, and Secrets Manager.
+      </p>
 
-<div class="pipeline-item">
-  <h4>Violations Pipeline Schedule</h4>
-  <a href="../assets/moving-etl/06_eventbridge_pipeline_violations.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png">
-  </a>
-  <p class="caption muted">
-    EventBridge rule scheduling incremental violation updates without manual intervention.
-  </p>
-</div>
-</section>
+      <div class="mini-tags">
+        <span class="mini-tag">AWS Lambda</span>
+        <span class="mini-tag">EventBridge</span>
+        <span class="mini-tag">RDS (MySQL)</span>
+        <span class="mini-tag">Secrets Manager</span>
+        <span class="mini-tag">Incremental Load</span>
+      </div>
+    </div>
+  </header>
 
-<hr>
+  <main class="container">
 
-<section>
-<h2>🔐 Secure Credential Management</h2>
+    <section>
+      <h2>1) Introduction</h2>
+      <p>
+        This project builds a complete, repeatable, and automated ETL pipeline that integrates
+        <strong>District of Columbia Moving Violations</strong> data and <strong>Daily Weather</strong> data into a
+        <strong>MySQL</strong> database hosted on <strong>AWS RDS</strong>.
+      </p>
 
-<div class="pipeline-item">
-  <h4>AWS Secrets Manager Configuration</h4>
-  <a href="../assets/moving-etl/07_secrets_manager_db_credentials.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png">
-  </a>
-  <p class="caption muted">
-    AWS Secrets Manager used to securely store database credentials and prevent
-    hardcoding of sensitive information in Lambda deployment packages.
-  </p>
-</div>
-</section>
+      <p>
+        The goal is not analytics. The goal is a robust cloud data storage and update environment that enables
+        accurate downstream analysis later (without manual refresh, duplicate inserts, or exposed credentials).
+      </p>
 
-<hr>
+      <ul class="bullets">
+        <li>MySQL schema + ERD design</li>
+        <li>Table creation SQL + primary key strategy</li>
+        <li>Python ETL (local full load + AWS Lambda incremental load)</li>
+        <li>Automated daily scheduling via EventBridge</li>
+        <li>Secure credential handling via Secrets Manager</li>
+        <li>Cloud database hosting on AWS RDS</li>
+        <li>Duplicate-safe ingestion (no repeated inserts)</li>
+      </ul>
+    </section>
 
-<section>
-<h2>🌐 RDS Network Configuration</h2>
+    <hr class="section-divider" />
 
-<div class="pipeline-item">
-  <h4>VPC & Subnet Configuration</h4>
-  <a href="../assets/moving-etl/08_rds_network_configuration.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/08_rds_network_configuration.png">
-  </a>
-  <p class="caption muted">
-    MySQL database deployed within a VPC-enabled AWS RDS instance with controlled
-    subnet access.
-  </p>
-</div>
+    <section>
+      <h2>2) Data Sources</h2>
 
-<div class="pipeline-item">
-  <h4>Security Group Rules</h4>
-  <a href="../assets/moving-etl/09_rds_security_group_rules.png" class="lightbox" target="_blank">
-    <img src="../assets/moving-etl/09_rds_security_group_rules.png">
-  </a>
-  <p class="caption muted">
-    Inbound and outbound rules configured via Security Groups to regulate
-    Lambda-to-RDS communication.
-  </p>
-</div>
-</section>
+      <h3>2.1 Moving Violations (District of Columbia Open Data)</h3>
+      <ul class="bullets">
+        <li>Dataset: Moving Violations Issued (JSON API with pagination)</li>
+        <li>Updated daily</li>
+        <li>Primary key: <code>violation_id</code></li>
+        <li>Key fields: issuing agency, fine amount, violation time, coordinates, description, accident indicator</li>
+      </ul>
 
-<hr>
+      <h3>2.2 Weather (VisualCrossing Daily Weather)</h3>
+      <ul class="bullets">
+        <li>Daily weather ingestion (limited free tier often requires day-by-day pulls)</li>
+        <li>Primary key: <code>weather_date</code></li>
+        <li>Key fields: precipitation, max/min temperature, humidity, wind speed, conditions, rainfall indicator</li>
+      </ul>
+    </section>
 
-<section>
-<h2>📌 System Outcomes</h2>
+    <hr class="section-divider" />
 
-<ul class="bullets">
-<li>Fully automated daily ingestion pipeline</li>
-<li>No duplicate record insertion</li>
-<li>Secure credential management</li>
-<li>Scalable serverless compute architecture</li>
-<li>Cloud-hosted relational storage</li>
-</ul>
+    <section>
+      <h2>3) Evidence Gallery (Click any image to zoom)</h2>
+      <p class="muted">
+        The screenshots below document the deployed pipeline components and operational proof (schema, Lambda runs,
+        scheduling, and cloud security configuration).
+      </p>
 
-<p class="muted">
-This infrastructure enables downstream analytical workflows without requiring
-manual dataset refresh or credential exposure.
-</p>
+      <div class="etl-grid">
 
-</section>
+        <!-- 1 -->
+        <div class="etl-card">
+          <a href="#lb1">
+            <img src="../assets/moving-etl/01_relational_data_model.png" alt="Relational Data Model">
+          </a>
+          <div class="etl-title">Relational Data Model</div>
+          <p class="etl-caption">MySQL schema linking weather and violations with clear keys to support future joins.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="etl-card">
+          <a href="#lb2">
+            <img src="../assets/moving-etl/02_lambda_etl_functions.png" alt="Lambda ETL Functions">
+          </a>
+          <div class="etl-title">Lambda ETL Functions</div>
+          <p class="etl-caption">Two serverless functions for incremental ingestion of weather and violations datasets.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="etl-card">
+          <a href="#lb3">
+            <img src="../assets/moving-etl/03_lambda_execution_weather.png" alt="Lambda Execution Logs Weather">
+          </a>
+          <div class="etl-title">Execution Logs (Weather)</div>
+          <p class="etl-caption">Run proof showing ingestion behavior and safe insert logic for daily weather updates.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="etl-card">
+          <a href="#lb4">
+            <img src="../assets/moving-etl/04_lambda_execution_violations.png" alt="Lambda Execution Logs Violations">
+          </a>
+          <div class="etl-title">Execution Logs (Violations)</div>
+          <p class="etl-caption">Run proof for violations ingestion with primary-key checks to prevent duplicates.</p>
+        </div>
+
+        <!-- 5 -->
+        <div class="etl-card">
+          <a href="#lb5">
+            <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png" alt="EventBridge Weather Schedule">
+          </a>
+          <div class="etl-title">EventBridge Trigger (Weather)</div>
+          <p class="etl-caption">Automated daily schedule triggering the weather ETL Lambda function.</p>
+        </div>
+
+        <!-- 6 -->
+        <div class="etl-card">
+          <a href="#lb6">
+            <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png" alt="EventBridge Violations Schedule">
+          </a>
+          <div class="etl-title">EventBridge Trigger (Violations)</div>
+          <p class="etl-caption">Automated schedule for the violations ETL Lambda function (no manual refresh needed).</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="etl-card">
+          <a href="#lb7">
+            <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png" alt="Secrets Manager Credentials">
+          </a>
+          <div class="etl-title">Secrets Manager</div>
+          <p class="etl-caption">Database credentials stored securely—no hardcoded secrets inside Lambda packages.</p>
+        </div>
+
+        <!-- 8 -->
+        <div class="etl-card">
+          <a href="#lb8">
+            <img src="../assets/moving-etl/08_rds_network_configuration.png" alt="RDS Network Configuration">
+          </a>
+          <div class="etl-title">RDS Connectivity / Networking</div>
+          <p class="etl-caption">RDS endpoint and VPC networking configuration supporting controlled access.</p>
+        </div>
+
+        <!-- 9 -->
+        <div class="etl-card">
+          <a href="#lb9">
+            <img src="../assets/moving-etl/09_rds_security_group_rules.png" alt="RDS Security Group Rules">
+          </a>
+          <div class="etl-title">Security Group Rules</div>
+          <p class="etl-caption">Inbound/outbound rules governing database access and service communication paths.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>4) Results & Outcomes</h2>
+      <ul class="bullets">
+        <li><strong>Automated daily ETL</strong> for both datasets using EventBridge + Lambda</li>
+        <li><strong>Cloud-hosted relational storage</strong> on AWS RDS (MySQL)</li>
+        <li><strong>Secure credential handling</strong> through AWS Secrets Manager</li>
+        <li><strong>Incremental load design</strong> that avoids duplicate inserts</li>
+        <li><strong>Reproducible pipeline setup</strong> enabling reliable downstream analysis later</li>
+      </ul>
+
+      <p class="muted">
+        This project demonstrates cloud data engineering fundamentals: schema design, serverless compute,
+        scheduling/orchestration, and security-first credential management.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">© <span id="y"></span> Zhe Wang</span>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Lightboxes (full-size view) -->
+  <div id="lb1" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/01_relational_data_model.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb2" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/02_lambda_etl_functions.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb3" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/03_lambda_execution_weather.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb4" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/04_lambda_execution_violations.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb5" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/05_eventbridge_pipeline_weather.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb6" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/06_eventbridge_pipeline_violations.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb7" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/07_secrets_manager_db_credentials.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb8" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/08_rds_network_configuration.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+  <div id="lb9" class="lb">
+    <a class="lb-close-area" href="#"></a>
+    <div class="lb-inner">
+      <img src="../assets/moving-etl/09_rds_security_group_rules.png" alt="">
+      <div class="lb-hint">Click anywhere to close</div>
+    </div>
+  </div>
+
+</body>
+</html>
