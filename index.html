@@ -3,156 +3,172 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zhe Wang | Machine Learning Engineer</title>
+  <title>Zhe Wang | Machine Learning & Analytics Engineer</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <header class="container">
     <nav class="nav">
       <div class="brand">Zhe Wang</div>
-
       <div class="links">
         <a href="index.html" class="active">Home</a>
         <a href="projects.html">Projects</a>
         <a href="#contact">Contact</a>
-        <a class="btn small primary" href="assets/Zhe_Wang_Resume.pdf" target="_blank">Resume</a>
       </div>
     </nav>
 
     <div class="hero">
       <h1>Machine Learning & Analytics Engineer</h1>
-
       <p class="subtitle">
-        I build reproducible ML systems, structured pipelines, and decision-support applications —
-        with a focus on reliability, clarity, and real-world usability.
+        I build reliable ML systems and analytics products—from model pipelines to dashboards—
+        with a focus on clarity, reproducibility, and real-world usability.
+      </p>
+      <p class="muted" style="margin-top:10px;">
+        My focus is not just building models — but designing reliable decision systems.
       </p>
 
       <div class="cta">
         <a class="btn primary" href="projects.html">View Projects</a>
-        <a class="btn" href="#contact">Get in Touch</a>
-      </div>
-
-      <!-- NEW: Visible Contact Strip -->
-      <div class="contact-strip" aria-label="Primary links">
-        <a href="mailto:wangz99@udayton.edu" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg><span>wangz99@udayton.edu</span></a>
-        <a href="https://github.com/wangz99-crypto" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5C5.73.5.75 5.6.75 11.9c0 5.1 3.29 9.41 7.86 10.94.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.39-3.88-1.39-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.22 1.78 1.22 1.04 1.8 2.72 1.28 3.38.98.1-.76.41-1.28.74-1.57-2.56-.3-5.26-1.3-5.26-5.8 0-1.28.45-2.33 1.2-3.15-.12-.3-.52-1.52.11-3.17 0 0 .98-.31 3.2 1.2a11 11 0 0 1 2.91-.4c.99 0 1.99.14 2.91.4 2.22-1.51 3.2-1.2 3.2-1.2.63 1.65.23 2.87.11 3.17.75.82 1.2 1.87 1.2 3.15 0 4.51-2.7 5.5-5.28 5.79.42.37.79 1.1.79 2.22v3.29c0 .31.21.68.8.56 4.56-1.53 7.85-5.84 7.85-10.94C23.25 5.6 18.27.5 12 .5Z"/></svg><span>GitHub</span></a>
-        <a href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.86 3.37-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg><span>LinkedIn</span></a>
+        <a class="btn" href="#contact">Get in touch</a>
       </div>
     </div>
   </header>
 
   <main class="container">
 
+    <!-- What I Build -->
     <section class="section">
       <h2>What I Build</h2>
       <ul class="bullets">
-        <li>End-to-end ML pipelines with versioning and reproducibility</li>
-        <li>Model evaluation systems with CI guardrails</li>
-        <li>Interactive decision-support applications</li>
-        <li>Cloud-based data pipelines with incremental updates</li>
+        <li>End-to-end ML pipelines with reproducibility, versioning, and guardrails</li>
+        <li>Decision apps that connect predictions to business actions and trade-offs</li>
+        <li>Data infrastructure and ETL workflows with incremental updates and observability</li>
+        <li>Simulation and optimization tools for operations planning under uncertainty</li>
       </ul>
     </section>
 
+    <!-- Featured Projects -->
     <section class="section">
       <h2>Featured Projects</h2>
 
       <section class="grid">
 
+        <!-- Featured 1: House Prices -->
         <div class="card">
           <div class="card-top">
             <div>
-              <h3>🏠 House Prices ML Pipeline</h3>
+              <h3>🏠 House Prices ML System</h3>
               <p class="muted">
-                Reproducible regression system with cross-validation,
-                model registry, ensembling, and CI safeguards.
+                Production-style ML pipeline with model versioning, reproducible training workflows,
+                reliability guardrails, and a live demo app.
               </p>
             </div>
             <span class="tag">ML System</span>
           </div>
 
           <ul class="bullets">
-            <li>OOF cross-validation & stacking</li>
-            <li>Registry with aliasing (latest / best / production)</li>
-            <li>Interactive Streamlit prediction demo</li>
+            <li>Model registry + reproducible runs</li>
+            <li>Data compatibility checks & contracts</li>
+            <li>Interactive Streamlit demo</li>
           </ul>
 
           <div class="card-actions">
-            <a class="btn primary"
-               href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/"
-               target="_blank">Live Demo</a>
-            <a class="btn"
-               href="https://github.com/wangz99-crypto/house-prices-ml-pipeline"
-               target="_blank">GitHub</a>
+            <a class="btn primary" href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/house-prices-ml-pipeline" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
 
+        <!-- Featured 2: Telco Churn -->
         <div class="card">
           <div class="card-top">
             <div>
-              
-        <div class="card">
-          <div class="card-top">
-            <div>
-              <h3>🧠 LLM Internal Assistant Gateway</h3>
+              <h3>📡 Telecom Customer Churn Decision App</h3>
               <p class="muted">
-                Enterprise-style LLM gateway with tool routing, audit logging,
-                and deterministic scenario testing for repeatable demos.
-              </p>
-            </div>
-            <span class="tag">AI Gateway</span>
-          </div>
-
-          <ul class="bullets">
-            <li>Auth & policy guardrails (API keys, rate limits, input limits)</li>
-            <li>Tool routing for runbooks / incidents + audit-ready envelopes</li>
-            <li>Demo-safe deterministic mode for CI & scenario playback</li>
-          </ul>
-
-          <div class="card-actions">
-            <a class="btn primary"
-               href="https://llm-internal-assistant.onrender.com/"
-               target="_blank" rel="noreferrer">Live Demo</a>
-            <a class="btn"
-               href="https://github.com/wangz99-crypto/llm-internal-assistant"
-               target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-        </div>
-
-<h3>📡 Telecom Churn Prediction</h3>
-              <p class="muted">
-                Classification system with AUC 0.86 and business impact simulation.
+                End-to-end churn risk scoring with business interpretation and interactive retention decision support.
               </p>
             </div>
             <span class="tag">Decision App</span>
           </div>
 
           <ul class="bullets">
-            <li>Multi-model comparison</li>
-            <li>$65K+ projected recovery</li>
-            <li>Interactive R Shiny app</li>
+            <li>Probabilistic churn risk scoring</li>
+            <li>Threshold-based strategy evaluation</li>
+            <li>Interactive incentive planning</li>
           </ul>
 
           <div class="card-actions">
-            <a class="btn primary"
-               href="https://victorwang.shinyapps.io/telco-churn-demo/"
-               target="_blank">Live App</a>
+            <a class="btn primary" href="https://victorwang.shinyapps.io/telco-churn-demo/" target="_blank" rel="noreferrer">Live App</a>
+            <a class="btn" href="reports/telecom-churn-report.html" target="_blank" rel="noreferrer">Full Report</a>
+          </div>
+        </div>
+
+        <!-- Featured 3: Cloud ETL -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>☁️ Automated Cloud ETL Pipeline</h3>
+              <p class="muted">
+                AWS-based pipeline integrating DC moving violations and daily weather into an RDS MySQL database
+                with automated incremental updates.
+              </p>
+            </div>
+            <span class="tag">Data Infrastructure</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Historical backfill + daily incremental runs</li>
+            <li>Idempotent loads + secrets management</li>
+            <li>CloudWatch-traceable runs + rebuild workflow</li>
+          </ul>
+
+          <div class="card-actions">
+            <a class="btn primary" href="projects/moving-violations-etl.html">Project Page</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/dc-moving-violations-cloud-etl" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Featured 4: LLM Gateway / Internal Assistant -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>🧠 LLM Internal Assistant Gateway (FastAPI)</h3>
+              <p class="muted">
+                Enterprise-style LLM gateway with policy enforcement, deterministic “scenario” mode,
+                tool routing, audit logging, and source-backed knowledge retrieval.
+              </p>
+            </div>
+            <span class="tag">AI Gateway</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Structured responses (summary/steps/notes) + citations</li>
+            <li>Tool routing for runbooks & incident workflows</li>
+            <li>Audit-friendly envelopes + deterministic demo mode</li>
+          </ul>
+
+          <div class="card-actions">
+            <a class="btn primary" href="https://llm-internal-assistant.onrender.com/" target="_blank" rel="noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/llm-internal-assistant" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
 
       </section>
+
+      <p class="muted" style="margin-top: 12px;">
+        See more systems on the <a href="projects.html">Projects</a> page.
+      </p>
     </section>
 
+    <!-- Contact -->
     <section class="section" id="contact">
       <h2>Contact</h2>
+      <p class="muted">Best way to reach me:</p>
       <div class="contact">
         <a class="btn" href="mailto:wangz99@udayton.edu">Email</a>
-        <a class="btn" href="assets/Zhe_Wang_Resume.pdf" target="_blank">Resume</a>
-        <a class="btn" href="https://github.com/wangz99-crypto" target="_blank">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank">LinkedIn</a>
+        <a class="btn" href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn" href="https://github.com/wangz99-crypto" target="_blank" rel="noreferrer">GitHub</a>
       </div>
     </section>
-
   </main>
 
   <footer class="container footer">
@@ -162,6 +178,5 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
