@@ -84,3 +84,37 @@ h1{font-size:40px;margin:0 0 10px;}
 }
 .footer{padding-top:0;padding-bottom:36px;}
 .contact{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+
+.links{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.links a{ margin-left:0; }
+
+.btn.small{
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:14px;
+}
+
+.contact-strip{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  color:var(--muted);
+  font-size:14px;
+}
+.contact-strip a{
+  color:var(--muted);
+  text-decoration:none;
+  border-bottom:1px solid rgba(107,114,128,.35);
+}
+.contact-strip a:hover{
+  color:var(--text);
+  border-bottom-color:rgba(17,24,39,.35);
+}
+.contact-strip .dot{ opacity:.55; }
