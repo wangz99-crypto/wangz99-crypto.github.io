@@ -31,9 +31,9 @@
             to deployment-ready demos—with CI guardrails and clear, decision-focused outputs.
           </p>
 
-          <!-- ===== A) 左侧 CTA：删掉 Resume 按钮，只保留两个 ===== -->
           <div class="cta">
-            <a class="btn primary" href="projects.html">View ML Projects</a>
+            <a class="btn primary" href="projects.html#ml-systems">View ML Projects</a>
+            <a class="btn" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
             <a class="btn" href="#contact">Contact</a>
           </div>
 
@@ -46,7 +46,7 @@
           <div class="hero-card">
             <h3 class="hero-card-title">Contact</h3>
 
-            <!-- ===== B) 右侧 Contact 卡片：只保留 Email / GitHub / LinkedIn，去掉所有简历相关按钮 ===== -->
+            <!-- ===== REPLACED: hero-contact with hero-cta icon buttons ===== -->
             <div class="hero-cta">
               <a class="icon-btn light" href="mailto:wangz99@udayton.edu">
                 <span class="icon" aria-hidden="true">
@@ -57,6 +57,18 @@
                   </svg>
                 </span>
                 <span>Email</span>
+              </a>
+
+              <a class="icon-btn dark" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">
+                <span class="icon" aria-hidden="true">
+                  <!-- download icon -->
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3v10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                    <path d="M8.5 10.5 12 13.9l3.5-3.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 17.5A2.5 2.5 0 0 0 7.5 20h9A2.5 2.5 0 0 0 19 17.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span>Resume</span>
               </a>
 
               <a class="icon-btn light" href="https://github.com/wangz99-crypto" target="_blank" rel="noreferrer">
@@ -83,10 +95,15 @@
                 <span>LinkedIn</span>
               </a>
             </div>
+            <!-- ===== END replacement ===== -->
 
-            <!-- ===== 卡片底部只保留 chips，已删掉 Download Resume 按钮 ===== -->
+            <div class="hero-card-actions">
+              <a class="btn primary" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">Download Resume</a>
+            </div>
+
             <div class="hero-chips">
               <span class="chip">MLOps</span>
+              <span class="chip">Model Registry</span>
               <span class="chip">CI Tests</span>
               <span class="chip">Deployment Demos</span>
             </div>
