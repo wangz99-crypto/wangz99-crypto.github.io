@@ -14,252 +14,249 @@
         <a href="index.html">Home</a>
         <a href="projects.html" class="active">Projects</a>
         <a href="index.html#contact">Contact</a>
+        <a class="btn small primary" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
       </div>
     </nav>
 
     <div class="page-hero">
       <h1>Projects</h1>
       <p class="subtitle muted">
-        Systems-focused projects spanning data infrastructure,
-        machine learning pipelines, and decision support applications.
+        Production-style ML systems and decision-support applications across modeling, deployment, and data infrastructure.
       </p>
     </div>
   </header>
 
   <main class="container">
-    <section class="grid">
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>🏠 House Prices ML System</h3>
-            <p class="muted">
-              Production-style ML pipeline with model versioning,
-              reproducible training workflows, and deployment-ready artifacts.
-            </p>
-          </div>
-          <span class="tag">ML Pipeline</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn primary" href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
-          <a class="btn" href="https://github.com/wangz99-crypto/house-prices-ml-pipeline" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>📊 KPI Dashboard (Power BI)</h3>
-            <p class="muted">
-              Enterprise KPI validation and multi-level operational reporting
-              for monthly performance review workflows.
-            </p>
-          </div>
-          <span class="tag">Decision System</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn" href="#" onclick="return false;">Coming soon</a>
-        </div>
-      </div>
-
-      <!-- NEW: LLM Gateway / Internal Assistant -->
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>🧠 LLM Internal Assistant Gateway (FastAPI)</h3>
-            <p class="muted">
-              Enterprise-style LLM gateway with deterministic scenario testing, tool routing,
-              audit logging, and source-backed internal knowledge retrieval.
-            </p>
-          </div>
-          <span class="tag">AI Gateway</span>
-        </div>
-
-        <ul class="bullets">
-          <li>Policy & auth guardrails (API keys, rate limits, input limits)</li>
-          <li>Deterministic scenario mode for repeatable demos & CI tests</li>
-          <li>Tool routing for runbooks / incidents + audit-ready envelopes</li>
-        </ul>
-
-        <div class="card-actions">
-          <a class="btn primary"
-             href="https://llm-internal-assistant.onrender.com/"
-             target="_blank" rel="noreferrer">
-            Live Demo
-          </a>
-
-          <a class="btn"
-             href="https://github.com/wangz99-crypto/llm-internal-assistant"
-             target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- India House Rent Dashboard (Dash + Render) -->
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>🏙️ India House Rent Dashboard (Dash)</h3>
-            <p class="muted">
-              Interactive rental market explorer built with Dash and Plotly, deployed on Render.
-              Supports multi-filter exploration across cities, BHK sizes, furnishing levels, floors, and locality ranking.
-            </p>
-          </div>
-          <span class="tag">Dashboard</span>
-        </div>
-
-        <ul class="bullets">
-          <li>City-level rent map + listing density</li>
-          <li>BHK comparison + trend & heatmap views</li>
-          <li>Locality drill-down with distribution plots</li>
-        </ul>
-
-        <div class="card-actions">
-          <a class="btn primary"
-             href="https://india-house-rent-dashboard.onrender.com/"
-             target="_blank" rel="noreferrer">
-            Live App
-          </a>
-
-          <a class="btn"
-             href="https://github.com/wangz99-crypto/india-house-rent-dashboard"
-             target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>📡 Telecom Customer Churn Prediction</h3>
-            <p class="muted">
-              End-to-end customer risk scoring system combining
-              predictive modeling, business interpretation,
-              and interactive decision support via Shiny.
-            </p>
-          </div>
-          <span class="tag">Decision App</span>
-        </div>
-
-        <ul class="bullets">
-          <li>Customer churn risk scoring via probabilistic modeling</li>
-          <li>Threshold-based retention strategy evaluation</li>
-          <li>Interactive incentive planning interface</li>
-        </ul>
-
-        <div class="card-actions">
-          <a class="btn primary"
-            href="https://victorwang.shinyapps.io/telco-churn-demo/"
-            target="_blank" rel="noreferrer">
-            Live App
-          </a>
-
-          <a class="btn"
-            href="reports/telecom-churn-report.html"
-            target="_blank" rel="noreferrer">
-            Full Report
-          </a>
-        </div>
-      </div>
-
-      <!-- Automated Cloud ETL Pipeline  -->
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>☁️ Automated Cloud ETL Pipeline</h3>
-            <p class="muted">
-              AWS-based data pipeline integrating DC moving violations and daily weather
-              into an RDS MySQL database with automated incremental updates.
-            </p>
-          </div>
-          <span class="tag">Data Infrastructure</span>
-        </div>
-
-        <ul class="bullets">
-          <li>Two-phase ingestion: historical batch + daily incremental updates</li>
-          <li>Idempotent loads (no duplicates) + secure secrets management</li>
-          <li>CloudWatch-traceable runs + reproducible full rebuild workflow</li>
-        </ul>
-
-        <div class="card-actions">
-          <a class="btn primary" href="projects/moving-violations-etl.html">Project Page</a>
-          <a class="btn"
-             href="https://github.com/wangz99-crypto/dc-moving-violations-cloud-etl"
-             target="_blank" rel="noreferrer">
-             GitHub (Cloud ETL Repo)
-          </a>
-        </div>
-      </div>
-
-      <!-- MedCare Decision Support (Streamlit)  -->
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>🏥 MedCare Decision Support (Streamlit)</h3>
-            <p class="muted">
-              Interactive healthcare simulation and decision-support tool powered by an Excel-based model,
-              deployed as a lightweight Streamlit app for scenario testing and policy evaluation.
-            </p>
-          </div>
-          <span class="tag">Decision App</span>
-        </div>
-
-        <ul class="bullets">
-          <li>Scenario-based simulation with adjustable inputs</li>
-          <li>Excel model alignment + transparent assumptions</li>
-          <li>Fast, shareable web demo for stakeholders</li>
-        </ul>
-
-        <div class="card-actions">
-          <a class="btn primary"
-             href="https://medcare-app-4reo4hqg7ga48ucazf7geo.streamlit.app/"
-             target="_blank" rel="noreferrer">
-            Live Demo
-          </a>
-
-          <a class="btn"
-             href="https://github.com/wangz99-crypto/medcare-streamlit"
-             target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- Swirltubs Inventory Optimization Tool -->
-      <div class="card">
-        <div class="card-top">
-          <div>
-            <h3>🚚 Service Van Inventory Optimization Tool</h3>
-            <p class="muted">
-              Optimization-based decision support system that recommends an optimal set of spare parts
-              to stock in service vans under storage capacity constraints in order to maximize annual net savings.
-            </p>
-          </div>
-          <span class="tag">Optimization System</span>
-        </div>
-
-        <ul class="bullets">
-          <li>Capacity-constrained inventory stocking optimization</li>
-          <li>Trade-off analysis between holding cost and revisit cost</li>
-          <li>Demand uncertainty stress testing via simulation</li>
-        </ul>
-
-        <div class="card-actions">
-          <a class="btn primary"
-            href="https://swirltubs-inventory-optimizer-jdrrzrf8rhdyce2ixlegdz.streamlit.app/"
-            target="_blank" rel="noreferrer">
-            Live App
-          </a>
-
-          <a class="btn"
-            href="https://github.com/wangz99-crypto/swirltubs-inventory-optimizer"
-            target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-        </div>
+    <section class="section">
+      <h2>Project Categories</h2>
+      <div class="card-actions">
+        <a class="btn primary" href="#ml-systems">ML Systems</a>
+        <a class="btn" href="#analytics-systems">Analytics & Decision Support</a>
       </div>
     </section>
+
+    <!-- ===================== -->
+    <!-- ML SYSTEMS (PRIMARY)  -->
+    <!-- ===================== -->
+    <section class="section" id="ml-systems">
+      <h2>Machine Learning Systems</h2>
+      <p class="muted">
+        Focus: reproducibility • evaluation rigor • CI guardrails • deployment-ready demos
+      </p>
+
+      <section class="grid">
+        <!-- House Prices -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>🏠 House Prices ML System</h3>
+              <p class="muted">
+                Production-style ML pipeline with model versioning, reproducible training workflows, and deployment-ready artifacts.
+              </p>
+            </div>
+            <span class="tag">Training + MLOps</span>
+          </div>
+
+          <p class="muted skills">Skills: cross-validation • ensembling • registry versioning • CI evaluation</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/house-prices-ml-pipeline" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <!-- LLM Gateway / Internal Assistant -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>🧠 LLM Internal Assistant Gateway (FastAPI)</h3>
+              <p class="muted">
+                Enterprise-style AI gateway with deterministic scenario testing, tool routing, audit logging, and source-backed retrieval.
+              </p>
+            </div>
+            <span class="tag">AI Systems</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Policy & auth guardrails (API keys, rate limits, input limits)</li>
+            <li>Deterministic scenario mode for repeatable demos & CI tests</li>
+            <li>Tool routing for runbooks / incidents + audit-ready envelopes</li>
+          </ul>
+
+          <p class="muted skills">Skills: API design • evaluation harness • reliability guardrails • tool routing</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="https://llm-internal-assistant.onrender.com/" target="_blank" rel="noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/llm-internal-assistant" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Telecom Churn -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>📡 Telecom Customer Churn Prediction</h3>
+              <p class="muted">
+                End-to-end churn modeling system combining probabilistic classification, threshold optimization, and deployment via Shiny.
+              </p>
+            </div>
+            <span class="tag">Classification</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Customer churn risk scoring via probabilistic modeling</li>
+            <li>Threshold-based strategy evaluation (precision/recall trade-offs)</li>
+            <li>Interactive incentive planning interface with ROI simulation</li>
+          </ul>
+
+          <p class="muted skills">Skills: model evaluation • threshold tuning • interpretability • deployment demo</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="https://victorwang.shinyapps.io/telco-churn-demo/" target="_blank" rel="noreferrer">Live App</a>
+            <a class="btn" href="reports/telecom-churn-report.html" target="_blank" rel="noreferrer">Full Report</a>
+          </div>
+        </div>
+
+        <!-- Cloud ETL -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>☁️ Automated Cloud ETL Pipeline</h3>
+              <p class="muted">
+                AWS-based pipeline integrating DC moving violations and daily weather into an RDS MySQL database with automated incremental updates.
+              </p>
+            </div>
+            <span class="tag">Data + Ops</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Two-phase ingestion: historical batch + daily incremental updates</li>
+            <li>Idempotent loads (no duplicates) + secure secrets management</li>
+            <li>CloudWatch-traceable runs + reproducible full rebuild workflow</li>
+          </ul>
+
+          <p class="muted skills">Skills: AWS • incremental loads • data quality • observability</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="projects/moving-violations-etl.html">Project Page</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/dc-moving-violations-cloud-etl" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ================================= -->
+    <!-- ANALYTICS & DECISION SUPPORT (2)  -->
+    <!-- ================================= -->
+    <section class="section" id="analytics-systems">
+      <h2>Analytics & Decision Support Systems</h2>
+      <p class="muted">
+        Business-facing systems that translate data into decisions through dashboards, scenario exploration, and optimization.
+      </p>
+
+      <section class="grid">
+        <!-- KPI Dashboard -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>📊 KPI Dashboard (Power BI)</h3>
+              <p class="muted">
+                Enterprise KPI validation and multi-level operational reporting for monthly performance review workflows.
+              </p>
+            </div>
+            <span class="tag">BI + KPI</span>
+          </div>
+
+          <p class="muted skills">Skills: KPI design • validation • stakeholder reporting • Power BI</p>
+
+          <div class="card-actions">
+            <a class="btn" href="#" onclick="return false;">Coming soon</a>
+          </div>
+        </div>
+
+        <!-- India House Rent Dashboard -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>🏙️ India House Rent Dashboard (Dash)</h3>
+              <p class="muted">
+                Interactive rental market explorer built with Dash and Plotly, deployed on Render.
+                Supports multi-filter exploration across cities, BHK sizes, furnishing levels, floors, and locality ranking.
+              </p>
+            </div>
+            <span class="tag">Analytics App</span>
+          </div>
+
+          <ul class="bullets">
+            <li>City-level rent map + listing density</li>
+            <li>BHK comparison + trend & heatmap views</li>
+            <li>Locality drill-down with distribution plots</li>
+          </ul>
+
+          <p class="muted skills">Skills: dashboarding • exploratory analysis • deployment (Render)</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="https://india-house-rent-dashboard.onrender.com/" target="_blank" rel="noreferrer">Live App</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/india-house-rent-dashboard" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <!-- MedCare Decision Support -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>🏥 MedCare Decision Support (Streamlit)</h3>
+              <p class="muted">
+                Interactive healthcare simulation and decision-support tool powered by an Excel-based model,
+                deployed as a lightweight Streamlit app for scenario testing and policy evaluation.
+              </p>
+            </div>
+            <span class="tag">Simulation</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Scenario-based simulation with adjustable inputs</li>
+            <li>Excel model alignment + transparent assumptions</li>
+            <li>Fast, shareable web demo for stakeholders</li>
+          </ul>
+
+          <p class="muted skills">Skills: simulation • what-if analysis • stakeholder demos</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="https://medcare-app-4reo4hqg7ga48ucazf7geo.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/medcare-streamlit" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Swirltubs Inventory Optimization -->
+        <div class="card">
+          <div class="card-top">
+            <div>
+              <h3>🚚 Service Van Inventory Optimization Tool</h3>
+              <p class="muted">
+                Optimization-based decision support system recommending an optimal set of spare parts under capacity constraints to maximize annual net savings.
+              </p>
+            </div>
+            <span class="tag">Optimization</span>
+          </div>
+
+          <ul class="bullets">
+            <li>Capacity-constrained inventory stocking optimization</li>
+            <li>Trade-off analysis between holding cost and revisit cost</li>
+            <li>Demand uncertainty stress testing via simulation</li>
+          </ul>
+
+          <p class="muted skills">Skills: optimization modeling • simulation • decision support</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="https://swirltubs-inventory-optimizer-jdrrzrf8rhdyce2ixlegdz.streamlit.app/" target="_blank" rel="noreferrer">Live App</a>
+            <a class="btn" href="https://github.com/wangz99-crypto/swirltubs-inventory-optimizer" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </section>
+    </section>
+
   </main>
 
   <footer class="container footer">

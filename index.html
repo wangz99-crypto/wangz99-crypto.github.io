@@ -16,30 +16,55 @@
         <a href="index.html" class="active">Home</a>
         <a href="projects.html">Projects</a>
         <a href="#contact">Contact</a>
-        <a class="btn small primary" href="assets/Zhe_Wang_Resume.pdf" target="_blank">Resume</a>
+        <a class="btn small primary" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
       </div>
     </nav>
 
     <div class="hero">
-      <h1>Machine Learning & Analytics Engineer</h1>
+      <div class="hero-layout">
 
-      <p class="subtitle">
-        I build reproducible ML systems, structured pipelines, and decision-support applications —
-        with a focus on reliability, clarity, and real-world usability.
-      </p>
+        <div class="hero-left">
+          <h1>Machine Learning Engineer</h1>
 
-      <div class="cta">
-        <a class="btn primary" href="projects.html">View Projects</a>
-        <a class="btn" href="#contact">Get in Touch</a>
-      </div>
+          <p class="subtitle">
+            I build production-style machine learning systems—from reproducible training pipelines and model evaluation
+            to deployment-ready demos—with CI guardrails and clear, decision-focused outputs.
+          </p>
 
-      <!-- NEW: Visible Contact Strip -->
-      <div class="contact-strip">
-        <a href="mailto:wangz99@udayton.edu">wangz99@udayton.edu</a>
-        <span class="dot">•</span>
-        <a href="https://github.com/wangz99-crypto" target="_blank">GitHub</a>
-        <span class="dot">•</span>
-        <a href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank">LinkedIn</a>
+          <div class="cta">
+            <a class="btn primary" href="projects.html#ml-systems">View ML Projects</a>
+            <a class="btn" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+
+          <p class="muted hero-status">
+            Seeking ML Engineering opportunities • Open to internships / full-time (May 2026)
+          </p>
+        </div>
+
+        <aside class="hero-right">
+          <div class="hero-card">
+            <h3 class="hero-card-title">Contact</h3>
+
+            <div class="hero-contact">
+              <a href="mailto:wangz99@udayton.edu">✉ wangz99@udayton.edu</a>
+              <a href="https://github.com/wangz99-crypto" target="_blank" rel="noreferrer">🔗 GitHub</a>
+              <a href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank" rel="noreferrer">🔗 LinkedIn</a>
+            </div>
+
+            <div class="hero-card-actions">
+              <a class="btn primary" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">Download Resume</a>
+            </div>
+
+            <div class="hero-chips">
+              <span class="chip">MLOps</span>
+              <span class="chip">Model Registry</span>
+              <span class="chip">CI Tests</span>
+              <span class="chip">Deployment Demos</span>
+            </div>
+          </div>
+        </aside>
+
       </div>
     </div>
   </header>
@@ -47,17 +72,7 @@
   <main class="container">
 
     <section class="section">
-      <h2>What I Build</h2>
-      <ul class="bullets">
-        <li>End-to-end ML pipelines with versioning and reproducibility</li>
-        <li>Model evaluation systems with CI guardrails</li>
-        <li>Interactive decision-support applications</li>
-        <li>Cloud-based data pipelines with incremental updates</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Featured Projects</h2>
+      <h2>Featured ML Systems</h2>
 
       <section class="grid">
 
@@ -66,26 +81,27 @@
             <div>
               <h3>🏠 House Prices ML Pipeline</h3>
               <p class="muted">
-                Reproducible regression system with cross-validation,
-                model registry, ensembling, and CI safeguards.
+                Reproducible regression pipeline with cross-validation, ensembling, and registry-style versioning.
               </p>
             </div>
-            <span class="tag">ML System</span>
+            <span class="tag">Training + MLOps</span>
           </div>
 
           <ul class="bullets">
             <li>OOF cross-validation & stacking</li>
-            <li>Registry with aliasing (latest / best / production)</li>
+            <li>Model registry aliasing (latest / best / production)</li>
             <li>Interactive Streamlit prediction demo</li>
           </ul>
+
+          <p class="muted skills">Skills: feature engineering • evaluation • model registry • CI guardrails</p>
 
           <div class="card-actions">
             <a class="btn primary"
                href="https://house-prices-ml-pipeline-nui9um72mmpod6g5mtsx3i.streamlit.app/"
-               target="_blank">Live Demo</a>
+               target="_blank" rel="noreferrer">Live Demo</a>
             <a class="btn"
                href="https://github.com/wangz99-crypto/house-prices-ml-pipeline"
-               target="_blank">GitHub</a>
+               target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
 
@@ -94,35 +110,58 @@
             <div>
               <h3>📡 Telecom Churn Prediction</h3>
               <p class="muted">
-                Classification system with AUC 0.86 and business impact simulation.
+                End-to-end churn modeling with threshold tuning, interpretability, and deployment via interactive Shiny app.
               </p>
             </div>
-            <span class="tag">Decision App</span>
+            <span class="tag">Classification</span>
           </div>
 
           <ul class="bullets">
-            <li>Multi-model comparison</li>
-            <li>$65K+ projected recovery</li>
-            <li>Interactive R Shiny app</li>
+            <li>Logistic regression & model comparisons (AUC 0.86)</li>
+            <li>Threshold tuning for precision/recall trade-offs</li>
+            <li>Retention ROI simulation and decision support</li>
           </ul>
+
+          <p class="muted skills">Skills: model evaluation • threshold tuning • interpretability • deployment demo</p>
 
           <div class="card-actions">
             <a class="btn primary"
                href="https://victorwang.shinyapps.io/telco-churn-demo/"
-               target="_blank">Live App</a>
+               target="_blank" rel="noreferrer">Live App</a>
+            <a class="btn"
+               href="projects.html#ml-systems">Project Details</a>
           </div>
         </div>
 
       </section>
     </section>
 
+    <section class="section">
+      <h2>What I Build</h2>
+      <ul class="bullets">
+        <li>Reproducible ML training pipelines with clear evaluation and reporting</li>
+        <li>CI-friendly model validation and “contract-style” checks</li>
+        <li>Deployment-ready demos (Streamlit / Shiny / FastAPI)</li>
+        <li>Data pipelines with incremental updates and traceable runs</li>
+        <li>Decision-support analytics (dashboards + KPI validation) for stakeholders</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>About</h2>
+      <p class="muted">
+        Graduate student in Business Analytics at the University of Dayton. I focus on ML engineering and applied systems:
+        designing pipelines that are reproducible, testable, and easy to demo to non-technical stakeholders.
+      </p>
+    </section>
+
     <section class="section" id="contact">
       <h2>Contact</h2>
       <div class="contact">
         <a class="btn" href="mailto:wangz99@udayton.edu">Email</a>
-        <a class="btn" href="assets/Zhe_Wang_Resume.pdf" target="_blank">Resume</a>
-        <a class="btn" href="https://github.com/wangz99-crypto" target="_blank">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank">LinkedIn</a>
+        <a class="btn" href="assets/Zhe_Wang_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+        <a class="btn" href="https://github.com/wangz99-crypto" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/zhe-wang-b89021354/" target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
     </section>
 

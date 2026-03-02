@@ -1,5 +1,5 @@
 :root{
-  --bg:#ffffff;
+  --bg:#f8fafc;
   --text:#111827;
   --muted:#6b7280;
   --border:#e5e7eb;
@@ -118,3 +118,107 @@ h1{font-size:40px;margin:0 0 10px;}
   border-bottom-color:rgba(17,24,39,.35);
 }
 .contact-strip .dot{ opacity:.55; }
+/* ==========================
+   ML Engineer polish (2026)
+   ========================== */
+
+/* Hero layout */
+.hero{
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 28px;
+}
+
+.hero-layout{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+  align-items:start;
+}
+
+.hero-status{
+  margin-top: 12px;
+}
+
+/* Hero contact card */
+.hero-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+.hero-card-title{
+  margin:0 0 10px;
+  font-size:16px;
+}
+
+.hero-contact{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.hero-contact a{
+  text-decoration:none;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:10px 12px;
+  border-radius:12px;
+  background:#fff;
+}
+
+.hero-contact a:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  transition: all .15s ease;
+}
+
+.hero-card-actions{
+  margin-top: 12px;
+}
+
+.hero-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+.chip{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+}
+
+/* Skills line */
+.skills{
+  margin-top: 10px;
+}
+
+/* Button hover */
+.btn{
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
+}
+
+.btn.primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.14);
+}
+
+/* Grid breathing room */
+.grid{
+  gap: 18px;
+}
+
+.card{
+  background:#fff;
+}
+
+/* Mobile */
+@media (max-width: 780px){
+  .hero-layout{ grid-template-columns: 1fr; }
+}
