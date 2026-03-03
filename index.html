@@ -39,6 +39,27 @@
     @media (max-width: 780px){
       .about-grid{ grid-template-columns: 1fr; }
     }
+
+    /* 确保导航右对齐 —— 稳定强制右推，不靠运气 */
+    .nav{
+      display:flex;
+      align-items:center;
+      padding:8px 0;
+    }
+
+    .nav .links{
+      margin-left:auto;   /* 关键：强制推到右侧 */
+      display:flex;
+      gap:16px;
+    }
+
+    /* 你原来 links a 用 margin-left，会跟 gap 叠加，清掉保证只由gap控制 */
+    .links a{
+      margin-left:0;
+      text-decoration:none;
+      color:var(--muted);
+      font-size:14px;
+    }
   </style>
 </head>
 
@@ -79,9 +100,10 @@
         <a class="btn" href="#contact">Get in touch</a>
       </div>
 
-    </div>
+    </div>   <!-- hero结束 -->
+</header>   <!-- 严格按照要求：在</div>(hero)后立刻补上</header> -->
 
-  <main class="container">
+<main class="container">
 
     <!-- ABOUT ME (replaces the old “Contact” position / sits above What I Build) -->
     <section class="section" id="about">
