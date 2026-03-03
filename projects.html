@@ -5,6 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects | Zhe Wang</title>
   <link rel="stylesheet" href="styles.css" />
+  <!-- 确保导航右对齐 —— 与主页保持一致 (margin-left:auto 最稳) -->
+  <style>
+    /* 这些样式应放在 styles.css 中, 但为了严格不变(除指定改动外)同时保证右对齐，在此处重复确保 */
+    .nav{
+      display:flex;
+      align-items:center;
+      padding:8px 0;
+    }
+
+    .nav .links{
+      margin-left:auto;   /* 关键：强制推到右侧 */
+      display:flex;
+      gap:16px;
+    }
+
+    .links a{
+      margin-left:0;
+      text-decoration:none;
+      color:var(--muted);
+      font-size:14px;
+    }
+    /* 保持原有风格变量 (若styles.css已有则无影响) */
+    :root{
+      --muted:#555;
+      --border:#e0e0e0;
+    }
+    .muted{color:var(--muted);}
+    .btn{
+      display:inline-block; padding:6px 14px; border:1px solid var(--border); border-radius:30px;
+      text-decoration:none; color:#000; background:#fff; font-size:14px;
+    }
+    .btn.primary{ background:#000; color:#fff; border-color:#000; }
+    .card{ border:1px solid var(--border); border-radius:20px; padding:18px; background:#fff; }
+    .card-top{ display:flex; justify-content:space-between; align-items:flex-start; }
+    .tag{ font-size:12px; background:#f0f0f0; padding:4px 10px; border-radius:30px; }
+    .bullets{ margin:12px 0 12px 20px; color:var(--muted); }
+    .card-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:15px; }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:22px; }
+    .container{ max-width:1200px; margin:0 auto; padding:0 20px; }
+    .footer{ margin-top:60px; padding:25px 0; border-top:1px solid var(--border); text-align:center; }
+  </style>
 </head>
 <body>
   <header class="container">
@@ -22,10 +63,10 @@
         Systems-focused projects spanning data infrastructure,
         machine learning pipelines, and decision support applications.
       </p>
-    </div>
-  </header>
+    </div>   <!-- page-hero 结束 -->
+</header>   <!-- 严格按照要求：在</div>(page-hero)后立刻补上</header> -->
 
-  <main class="container">
+<main class="container">
     <section class="grid">
       <div class="card">
         <div class="card-top">
