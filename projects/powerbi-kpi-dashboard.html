@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Executive KPI Dashboard | Zhe Wang</title>
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    .etl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .etl-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+    }
+
+    .etl-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #fafafa;
+      cursor: zoom-in;
+      display: block;
+    }
+
+    .etl-title {
+      margin: 10px 0 4px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .etl-caption {
+      margin: 0;
+      color: rgba(0,0,0,0.62);
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+
+    .section-divider {
+      margin: 22px 0;
+      border: 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .mini-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .mini-tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.05);
+      font-size: 0.9rem;
+      color: rgba(0,0,0,0.7);
+    }
+
+    .lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+    }
+
+    .lb.show {
+      display: flex;
+    }
+
+    .lb-inner {
+      max-width: 92vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lb-inner img {
+      max-width: 92vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      background: #111;
+    }
+
+    .lb-hint {
+      text-align: center;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.95rem;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container">
+    <nav class="nav">
+      <div class="brand">Zhe Wang</div>
+      <div class="links">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html" class="active">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="page-hero">
+      <h1>📊 Executive KPI Dashboard</h1>
+      <p class="subtitle muted">
+        Interactive Power BI dashboard for executive performance monitoring across Safety, People,
+        Quality, Delivery, and Cost, with trend analysis, site comparison, and target tracking.
+      </p>
+
+      <div class="mini-tags">
+        <span class="mini-tag">Power BI</span>
+        <span class="mini-tag">DAX</span>
+        <span class="mini-tag">KPI Tracking</span>
+        <span class="mini-tag">Heatmap</span>
+        <span class="mini-tag">Waterfall Analysis</span>
+        <span class="mini-tag">Executive Reporting</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section>
+      <h2>1) Introduction</h2>
+      <p>
+        This project delivers an executive-facing KPI dashboard built in <strong>Power BI</strong> to help leadership
+        monitor multi-site performance across five operational areas:
+        <strong>Safety, People, Quality, Delivery, and Cost</strong>.
+      </p>
+
+      <p>
+        The objective is to transform KPI data into a decision-support product that makes it easier to identify
+        underperforming areas, compare site-level contributions, and track monthly changes against operational targets.
+      </p>
+
+      <ul class="bullets">
+        <li>Executive KPI scorecards with target comparison</li>
+        <li>Monthly trend charts for major KPI categories</li>
+        <li>Site-level target achievement heatmap</li>
+        <li>Driver analysis through ranked contributions</li>
+        <li>Waterfall visualization for site performance impact</li>
+        <li>Interactive filtering by year, month, site, and KPI</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>2) Dashboard Design & Analytical Focus</h2>
+
+      <h3>2.1 Executive KPI Overview</h3>
+      <ul class="bullets">
+        <li>High-level KPI cards summarize the current period’s performance</li>
+        <li>Small trend charts provide a fast monthly view of each operational domain</li>
+        <li>Target achievement heatmap highlights which sites are on or off target</li>
+        <li>Designed for quick executive scanning and exception spotting</li>
+      </ul>
+
+      <h3>2.2 KPI Performance Drivers</h3>
+      <ul class="bullets">
+        <li>Users can select a KPI and examine which sites contribute most positively or negatively</li>
+        <li>Bar ranking surfaces top contributors immediately</li>
+        <li>Waterfall analysis shows how individual sites drive total performance</li>
+        <li>Supports operational discussions around root causes and intervention priorities</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>3) Evidence Gallery (Click to zoom)</h2>
+      <p class="muted">
+        The screenshots below document the dashboard structure, interactive filtering, and the main
+        analytical views used to support executive KPI review.
+      </p>
+
+      <div class="etl-grid">
+
+        <div class="etl-card">
+          <img src="../assets/powerbi-kpi-dashboard/overview_dashboard.png"
+               alt="Executive KPI Overview"
+               data-full="../assets/powerbi-kpi-dashboard/overview_dashboard.png"
+               onclick="openLightbox(this.dataset.full)" />
+          <div class="etl-title">Executive KPI Overview</div>
+          <p class="etl-caption">
+            Main dashboard page summarizing performance across Safety, People, Quality, Delivery, and Cost.
+          </p>
+        </div>
+
+        <div class="etl-card">
+          <img src="../assets/powerbi-kpi-dashboard/performance_drivers.png"
+               alt="KPI Performance Drivers"
+               data-full="../assets/powerbi-kpi-dashboard/performance_drivers.png"
+               onclick="openLightbox(this.dataset.full)" />
+          <div class="etl-title">KPI Performance Drivers</div>
+          <p class="etl-caption">
+            Driver page showing ranked site contributions and waterfall analysis for a selected KPI.
+          </p>
+        </div>
+
+        <div class="etl-card">
+          <img src="../assets/powerbi-kpi-dashboard/kpi_heatmap.png"
+               alt="KPI Heatmap"
+               data-full="../assets/powerbi-kpi-dashboard/kpi_heatmap.png"
+               onclick="openLightbox(this.dataset.full)" />
+          <div class="etl-title">KPI Target Achievement Heatmap</div>
+          <p class="etl-caption">
+            Heatmap view for quickly identifying which sites meet or miss KPI targets across categories.
+          </p>
+        </div>
+
+        <div class="etl-card">
+          <img src="../assets/powerbi-kpi-dashboard/filters_demo_overview.png"
+               alt="Overview Filters Demo"
+               data-full="../assets/powerbi-kpi-dashboard/filters_demo_overview.png"
+               onclick="openLightbox(this.dataset.full)" />
+          <div class="etl-title">Interactive Filters (Overview)</div>
+          <p class="etl-caption">
+            Demonstrates filtering by year, month, and site to dynamically update executive KPI summaries.
+          </p>
+        </div>
+
+        <div class="etl-card">
+          <img src="../assets/powerbi-kpi-dashboard/filters_demo_performance.png"
+               alt="Performance Filters Demo"
+               data-full="../assets/powerbi-kpi-dashboard/filters_demo_performance.png"
+               onclick="openLightbox(this.dataset.full)" />
+          <div class="etl-title">Interactive Filters (Drivers)</div>
+          <p class="etl-caption">
+            Shows KPI-specific filtering to explore performance drivers and compare site-level impact.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>4) Results & Outcomes</h2>
+      <ul class="bullets">
+        <li><strong>Centralized KPI monitoring</strong> across major operational categories</li>
+        <li><strong>Executive-friendly reporting layout</strong> with quick visibility into trends and target gaps</li>
+        <li><strong>Site-level comparison</strong> through heatmaps, rankings, and waterfall analysis</li>
+        <li><strong>Interactive exploration</strong> using filters for year, month, site, and KPI</li>
+        <li><strong>Decision-support value</strong> by surfacing performance drivers and priority problem areas</li>
+      </ul>
+
+      <p class="muted">
+        This project demonstrates how business KPI reporting can be turned into an interactive decision-support
+        dashboard that combines metric visibility, comparative analysis, and executive usability.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">© <span id="y"></span> Zhe Wang</span>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    function openLightbox(src) {
+      const lb = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      img.src = src;
+      lb.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      lb.classList.remove("show");
+      img.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
+  </script>
+
+  <div id="lightbox" class="lb" onclick="closeLightbox()">
+    <div class="lb-inner" onclick="event.stopPropagation()">
+      <img id="lightbox-img" alt="Zoomed image">
+      <div class="lb-hint">Click outside the image (or press ESC) to close</div>
+    </div>
+  </div>
+
+</body>
+</html>
