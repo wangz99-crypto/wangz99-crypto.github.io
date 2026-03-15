@@ -123,17 +123,17 @@
           <div>
             <h3>🧠 LLM Internal Assistant Gateway (FastAPI)</h3>
             <p class="muted">
-              Enterprise-style LLM gateway with deterministic scenario testing, tool routing,
-              audit logging, and source-backed internal knowledge retrieval.
+              FastAPI gateway routing internal ops queries to tools, RAG, or LLM — with hybrid
+              keyword/semantic routing, retrieval evaluation, and graceful degraded-path handling.
             </p>
           </div>
           <span class="tag">AI Gateway</span>
         </div>
 
         <ul class="bullets">
-          <li>Policy & auth guardrails (API keys, rate limits, input limits)</li>
-          <li>Deterministic scenario mode for repeatable demos & CI tests</li>
-          <li>Tool routing for runbooks / incidents + audit-ready envelopes</li>
+          <li>Hybrid tool routing: keyword-first dispatch with embedding-based semantic fallback and definitional-query guard</li>
+          <li>Retrieval eval harness: 15 labeled examples, hit@1 / hit@3, per-category and per-difficulty breakdown</li>
+          <li>Relevance-threshold guardrails + structured kb_fallback warnings on degraded paths</li>
         </ul>
 
         <div class="card-actions">

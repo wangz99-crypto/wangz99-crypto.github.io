@@ -251,18 +251,18 @@
           <div class="card-top">
             <div>
               <h3>🧠 LLM Internal Assistant Gateway (FastAPI)</h3>
-              <p class="muted">
-                Enterprise-style LLM gateway with policy enforcement, deterministic “scenario” mode,
-                tool routing, audit logging, and source-backed knowledge retrieval.
+              <p class=”muted”>
+                FastAPI gateway for internal ops queries — hybrid keyword/semantic tool routing,
+                RAG knowledge retrieval, and a graceful fallback path when the LLM is unreachable.
               </p>
             </div>
             <span class="tag">AI Gateway</span>
           </div>
 
           <ul class="bullets">
-            <li>Structured responses (summary/steps/notes) + citations</li>
-            <li>Tool routing for runbooks &amp; incident workflows</li>
-            <li>Audit-friendly envelopes + deterministic demo mode</li>
+            <li>Hybrid tool routing: keyword-first with embedding-based semantic fallback</li>
+            <li>Offline retrieval eval — hit@1 / hit@3 over 15 labeled examples</li>
+            <li>Relevance-threshold guardrails + kb_fallback degraded path</li>
           </ul>
 
           <div class="card-actions">
