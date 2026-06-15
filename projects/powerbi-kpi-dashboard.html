@@ -62,6 +62,20 @@
     }
     .achievements li { font-size: 0.93rem; color: rgba(0,0,0,0.72); }
 
+    /* ── project meta row ── */
+    .project-meta {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .meta-item {
+      font-size: 0.84rem;
+      color: rgba(0,0,0,0.48);
+    }
+
     /* ── tech bar (top-level pills) ── */
     .tech-bar {
       display: flex;
@@ -355,8 +369,15 @@
           <li>Reduced KPI attribution time from hours of spreadsheet work to under 30 seconds</li>
           <li>Implemented 20+ validated DAX measures with weighted roll-ups across site, subgroup, SBU, and corporate levels</li>
           <li>Fixed a 6.8-point KPI error caused by averaging percentages — corrected via volume-weighted aggregation</li>
-          <li>Achieved zero calculation discrepancies during final QA across all 24 sites</li>
+          <li>Validated all KPI calculations with zero discrepancies across 24 manufacturing sites and four organizational levels during final QA</li>
         </ul>
+      </div>
+
+      <div class="project-meta">
+        <span class="meta-item">🎓 University of Dayton · BAN 710 Capstone</span>
+        <span class="meta-item">🏭 Manufacturing Business Intelligence</span>
+        <span class="meta-item">📅 Spring 2026</span>
+        <span class="meta-item">👥 Executive Stakeholders</span>
       </div>
     </div>
   </header>
@@ -440,21 +461,20 @@
         <span class="tech-pill">DAX</span>
         <span class="tech-pill">Power Query</span>
         <span class="tech-pill">Star Schema</span>
-        <span class="tech-pill">Power BI Service</span>
+        <span class="tech-pill">Executive BI</span>
       </div>
       <div class="stack-section">
         <div class="stack-card">
           <div class="stack-label">Visualization</div>
           <div class="stack-tags">
-            <span class="stag">Power BI Desktop</span>
             <span class="stag">Waterfall Chart</span>
             <span class="stag">Hit / Miss Heatmap</span>
+            <span class="stag">Cascading Slicers</span>
           </div>
         </div>
         <div class="stack-card">
           <div class="stack-label">Computation</div>
           <div class="stack-tags">
-            <span class="stag">DAX</span>
             <span class="stag">ALLEXCEPT</span>
             <span class="stag">REMOVEFILTERS</span>
             <span class="stag">CALCULATE</span>
@@ -463,7 +483,6 @@
         <div class="stack-card">
           <div class="stack-label">Data Transformation</div>
           <div class="stack-tags">
-            <span class="stag">Power Query (M)</span>
             <span class="stag">Null Handling</span>
             <span class="stag">Type Coercion</span>
             <span class="stag">Name Standardization</span>
@@ -472,9 +491,9 @@
         <div class="stack-card">
           <div class="stack-label">Data Modeling</div>
           <div class="stack-tags">
-            <span class="stag">Star Schema</span>
             <span class="stag">Dimensional Modeling</span>
             <span class="stag">Single-Direction Relationships</span>
+            <span class="stag">Date Dimension</span>
           </div>
         </div>
         <div class="stack-card">
@@ -727,9 +746,9 @@ flowchart LR
       <div class="leadership-outcome">
         <h3>Leadership Outcome</h3>
         <p>
-          The dashboard enabled executives to identify which manufacturing site was driving KPI misses
-          and quantify its contribution in under 30 seconds, replacing a manual workflow that previously
-          required consolidating multiple spreadsheets across the organization.
+          The dashboard became the primary interface for monthly KPI reviews, enabling executives to
+          identify root-cause sites and quantify their impact in under 30 seconds while eliminating
+          manual spreadsheet consolidation across the organization.
         </p>
       </div>
     </section>
