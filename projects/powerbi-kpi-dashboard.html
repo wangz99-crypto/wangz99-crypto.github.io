@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Executive KPI Dashboard | Zhe Wang</title>
+  <title>Corporate KPI Dashboard | Zhe Wang</title>
   <link rel="stylesheet" href="../styles.css" />
 
   <style>
@@ -67,6 +67,34 @@
       color: rgba(0,0,0,0.7);
     }
 
+    .outcome-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 0.95rem;
+    }
+
+    .outcome-table th,
+    .outcome-table td {
+      padding: 9px 12px;
+      border: 1px solid rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .outcome-table th {
+      background: #f5f5f5;
+      font-weight: 700;
+    }
+
+    .outcome-table td:first-child {
+      font-weight: 600;
+    }
+
+    .outcome-table .good {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
     .lb {
       position: fixed;
       inset: 0;
@@ -124,19 +152,23 @@
     </nav>
 
     <div class="page-hero">
-      <h1>📊 Executive KPI Dashboard</h1>
+      <h1>📊 Corporate KPI Dashboard — GD-OTS</h1>
       <p class="subtitle muted">
-        Interactive Power BI dashboard for executive performance monitoring across Safety, People,
-        Quality, Delivery, and Cost, with trend analysis, site comparison, and target tracking.
+        Seven-page Power BI dashboard built for General Dynamics Ordnance and Tactical Systems
+        as a University of Dayton BAN 710 Business Analytics Capstone (Spring 2026). Delivers
+        30-second KPI attribution across 24 manufacturing sites using weighted roll-ups,
+        leave-one-out impact analysis, and 20+ validated DAX measures.
       </p>
 
       <div class="mini-tags">
         <span class="mini-tag">Power BI</span>
         <span class="mini-tag">DAX</span>
-        <span class="mini-tag">KPI Tracking</span>
-        <span class="mini-tag">Heatmap</span>
+        <span class="mini-tag">SPQDC Framework</span>
+        <span class="mini-tag">Weighted Roll-Up</span>
         <span class="mini-tag">Waterfall Analysis</span>
         <span class="mini-tag">Executive Reporting</span>
+        <span class="mini-tag">Data Modeling</span>
+        <span class="mini-tag">Power Query</span>
       </div>
     </div>
   </header>
@@ -144,113 +176,188 @@
   <main class="container">
 
     <section>
-      <h2>1) Introduction</h2>
+      <h2>1) Background & Problem</h2>
       <p>
-        This project delivers an executive-facing KPI dashboard built in <strong>Power BI</strong> to help leadership
-        monitor multi-site performance across five operational areas:
-        <strong>Safety, People, Quality, Delivery, and Cost</strong>.
+        General Dynamics Ordnance and Tactical Systems (GD-OTS) operates <strong>24 manufacturing sites</strong>
+        organized into a four-level hierarchy — sites → subgroups → Strategic Business Units → corporate.
+        Monthly performance reviews track five KPI categories collectively known as <strong>SPQDC</strong>:
+        Safety, People, Quality, Delivery, and Cost.
       </p>
 
       <p>
-        The objective is to transform KPI data into a decision-support product that makes it easier to identify
-        underperforming areas, compare site-level contributions, and track monthly changes against operational targets.
+        Prior to this project, all SPQDC reporting was produced manually in Excel. Performance was shown as
+        flat company-level percentages with no visibility into <em>which site</em> was responsible for a KPI
+        miss or <em>by how much</em>. Root-causing a miss required pulling and reconciling multiple spreadsheets
+        — a process that consumed significant time during monthly reviews.
       </p>
 
+      <p>
+        The requirement set at kickoff was precise: <strong>identify which site is driving a KPI miss and by
+        how much, in under 30 seconds, without manual spreadsheet work.</strong>
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>2) Methodology</h2>
+
+      <h3>2.1 Weighted Roll-Up (No Averaging of Averages)</h3>
+      <p>
+        All company-level and SBU-level figures aggregate raw numerators and denominators across sites first,
+        then compute one weighted result. Simple percentage averaging gives equal weight to a site handling
+        100 lines and one handling 10,000 — the weighted approach ensures that site scale is correctly
+        reflected at every organizational level. This distinction changed which sites appeared as highest-impact
+        contributors during development validation.
+      </p>
+
+      <h3>2.2 Leave-One-Out Site Impact Logic</h3>
+      <p>
+        The KPI Performance Drivers page computes each site's <em>marginal impact</em> on the company total.
+        For every site, the dashboard calculates the full company KPI, then removes that site's contribution
+        using <code>ALLEXCEPT</code> / <code>REMOVEFILTERS</code> in DAX, and returns the difference.
+        Green bars in the waterfall chart represent sites that move the KPI toward target; red bars pull it away.
+        This directly answers the attribution question without any manual consolidation.
+      </p>
+
+      <h3>2.3 Validation Framework</h3>
+      <p>
+        January 2025 was selected as the baseline validation month — the first period with complete data across
+        all 24 sites. Every DAX measure was validated against the client's existing Excel figures at the site,
+        subgroup, SBU, and corporate levels. The final QA check produced <strong>zero calculation errors</strong>
+        before the dashboard was delivered.
+      </p>
+
+      <h3>2.4 Data Governance</h3>
       <ul class="bullets">
-        <li>Executive KPI scorecards with target comparison</li>
-        <li>Monthly trend charts for major KPI categories</li>
-        <li>Site-level target achievement heatmap</li>
-        <li>Driver analysis through ranked contributions</li>
-        <li>Waterfall visualization for site performance impact</li>
-        <li>Interactive filtering by year, month, site, and KPI</li>
+        <li>Placeholder values (–1 for not-applicable) converted to null in Power Query before any measure runs</li>
+        <li>Site names standardized across all source files to prevent silent join failures</li>
+        <li>All model relationships set to single-direction one-to-many (bidirectional filtering removed after
+          it produced wrong values at SBU-level filter contexts)</li>
+        <li>GD-OTS data team can load new monthly files independently — no preprocessing or analyst involvement required</li>
       </ul>
     </section>
 
     <hr class="section-divider" />
 
     <section>
-      <h2>2) Dashboard Design & Analytical Focus</h2>
+      <h2>3) Dashboard Architecture</h2>
+      <p>
+        The model follows a <strong>star schema</strong>: a central KPI fact table joined to dimension tables
+        for sites, months, targets, and KPI categories. Source data is loaded from five Excel files via six
+        Power Query queries that handle all cleaning before data enters the model.
+      </p>
 
-      <h3>2.1 Executive KPI Overview</h3>
-      <ul class="bullets">
-        <li>High-level KPI cards summarize the current period’s performance</li>
-        <li>Small trend charts provide a fast monthly view of each operational domain</li>
-        <li>Target achievement heatmap highlights which sites are on or off target</li>
-        <li>Designed for quick executive scanning and exception spotting</li>
-      </ul>
+      <p>
+        All seven pages share a cascading filter panel — Year, Month, SBU, Group, Site — that updates every
+        visual simultaneously. Selecting an SBU automatically limits the available Group and Site options to
+        that unit's hierarchy.
+      </p>
 
-      <h3>2.2 KPI Performance Drivers</h3>
+      <h3>Seven Dashboard Pages</h3>
       <ul class="bullets">
-        <li>Users can select a KPI and examine which sites contribute most positively or negatively</li>
-        <li>Bar ranking surfaces top contributors immediately</li>
-        <li>Waterfall analysis shows how individual sites drive total performance</li>
-        <li>Supports operational discussions around root causes and intervention priorities</li>
+        <li><strong>Page 1 — Executive KPI Overview:</strong> Five scorecards (Safety, People, Quality, Delivery,
+          Cost) with sub-metric toggles, five monthly trend lines, and a site-level hit/miss heatmap across
+          all 24 sites and all five KPI categories.</li>
+        <li><strong>Page 2 — KPI Performance Drivers:</strong> Leave-one-out waterfall + ranked bar chart.
+          Select any SPQDC category; all visuals update to show each site's marginal impact on that KPI.</li>
+        <li><strong>Pages 3–7 — Individual KPI Drill-Downs:</strong> One page per SPQDC category. Each shows
+          a scorecard vs. target, historical trend chart, monthly trend vs. target line, and a site ranking chart.</li>
       </ul>
     </section>
 
     <hr class="section-divider" />
 
     <section>
-      <h2>3) Evidence Gallery (Click to zoom)</h2>
+      <h2>4) Dashboard Gallery (Click to zoom)</h2>
       <p class="muted">
-        The screenshots below document the dashboard structure, interactive filtering, and the main
-        analytical views used to support executive KPI review.
+        All seven pages of the delivered dashboard, covering the executive overview, performance driver analysis,
+        and individual drill-downs for each SPQDC category.
       </p>
 
       <div class="etl-grid">
 
         <div class="etl-card">
-          <img src="../assets/powerbi-kpi-dashboard/overview_dashboard.png"
+          <img src="../assets/powerbi-kpi-dashboard/01_overview.png"
                alt="Executive KPI Overview"
-               data-full="../assets/powerbi-kpi-dashboard/overview_dashboard.png"
+               data-full="../assets/powerbi-kpi-dashboard/01_overview.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Executive KPI Overview</div>
+          <div class="etl-title">Page 1 — Executive KPI Overview</div>
           <p class="etl-caption">
-            Main dashboard page summarizing performance across Safety, People, Quality, Delivery, and Cost.
+            Five KPI scorecards with sub-metric toggles, monthly trend lines, and a hit/miss heatmap
+            across all 24 sites for the selected period.
           </p>
         </div>
 
         <div class="etl-card">
-          <img src="../assets/powerbi-kpi-dashboard/performance_drivers.png"
+          <img src="../assets/powerbi-kpi-dashboard/02_performance_drivers.png"
                alt="KPI Performance Drivers"
-               data-full="../assets/powerbi-kpi-dashboard/performance_drivers.png"
+               data-full="../assets/powerbi-kpi-dashboard/02_performance_drivers.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">KPI Performance Drivers</div>
+          <div class="etl-title">Page 2 — KPI Performance Drivers</div>
           <p class="etl-caption">
-            Driver page showing ranked site contributions and waterfall analysis for a selected KPI.
+            Leave-one-out waterfall and ranked site bar chart. Answers "which site is driving this KPI miss
+            and by how much" in under 30 seconds for any selected SPQDC category.
           </p>
         </div>
 
         <div class="etl-card">
-          <img src="../assets/powerbi-kpi-dashboard/kpi_heatmap.png"
-               alt="KPI Heatmap"
-               data-full="../assets/powerbi-kpi-dashboard/kpi_heatmap.png"
+          <img src="../assets/powerbi-kpi-dashboard/03_safety.png"
+               alt="Safety Drill-Down"
+               data-full="../assets/powerbi-kpi-dashboard/03_safety.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">KPI Target Achievement Heatmap</div>
+          <div class="etl-title">Page 3 — Safety Drill-Down</div>
           <p class="etl-caption">
-            Heatmap view for quickly identifying which sites meet or miss KPI targets across categories.
+            Recordable Injury Rate (injuries × 200,000 / exposure hours) vs. target, with historical trend
+            and site ranking by highest injury rate.
           </p>
         </div>
 
         <div class="etl-card">
-          <img src="../assets/powerbi-kpi-dashboard/filters_demo_overview.png"
-               alt="Overview Filters Demo"
-               data-full="../assets/powerbi-kpi-dashboard/filters_demo_overview.png"
+          <img src="../assets/powerbi-kpi-dashboard/04_people.png"
+               alt="People Drill-Down"
+               data-full="../assets/powerbi-kpi-dashboard/04_people.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Interactive Filters (Overview)</div>
+          <div class="etl-title">Page 4 — People Drill-Down</div>
           <p class="etl-caption">
-            Demonstrates filtering by year, month, and site to dynamically update executive KPI summaries.
+            Monthly employee retention rate with Hourly / Salaried toggle, historical trend, and site ranking.
+            Roll-ups weighted by headcount, not averaged.
           </p>
         </div>
 
         <div class="etl-card">
-          <img src="../assets/powerbi-kpi-dashboard/filters_demo_performance.png"
-               alt="Performance Filters Demo"
-               data-full="../assets/powerbi-kpi-dashboard/filters_demo_performance.png"
+          <img src="../assets/powerbi-kpi-dashboard/05_quality.png"
+               alt="Quality Drill-Down"
+               data-full="../assets/powerbi-kpi-dashboard/05_quality.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Interactive Filters (Drivers)</div>
+          <div class="etl-title">Page 5 — Quality Drill-Down</div>
           <p class="etl-caption">
-            Shows KPI-specific filtering to explore performance drivers and compare site-level impact.
+            Scrap $ and Scrap % of Sales toggle. Monthly scrap trend vs. target and top sites by scrap dollar
+            value — directly actionable cost-of-waste visibility.
+          </p>
+        </div>
+
+        <div class="etl-card">
+          <img src="../assets/powerbi-kpi-dashboard/06_delivery.png"
+               alt="Delivery Drill-Down"
+               data-full="../assets/powerbi-kpi-dashboard/06_delivery.png"
+               onclick="openLightbox(this.dataset.full)" />
+          <div class="etl-title">Page 6 — Delivery Drill-Down</div>
+          <p class="etl-caption">
+            On-Time Delivery % and Lines Missed per 100 toggle. OTD trend vs. target and top sites by
+            OTD — volume-weighted so a large-site miss isn't masked by percentage alone.
+          </p>
+        </div>
+
+        <div class="etl-card">
+          <img src="../assets/powerbi-kpi-dashboard/07_cost.png"
+               alt="Cost Drill-Down"
+               data-full="../assets/powerbi-kpi-dashboard/07_cost.png"
+               onclick="openLightbox(this.dataset.full)" />
+          <div class="etl-title">Page 7 — Cost Drill-Down</div>
+          <p class="etl-caption">
+            Labor Efficiency % (earned hours / actual hours) vs. target, with historical trend and top sites
+            by labor efficiency. Hours Over per 100 toggle available.
           </p>
         </div>
 
@@ -260,19 +367,58 @@
     <hr class="section-divider" />
 
     <section>
-      <h2>4) Results & Outcomes</h2>
-      <ul class="bullets">
-        <li><strong>Centralized KPI monitoring</strong> across major operational categories</li>
-        <li><strong>Executive-friendly reporting layout</strong> with quick visibility into trends and target gaps</li>
-        <li><strong>Site-level comparison</strong> through heatmaps, rankings, and waterfall analysis</li>
-        <li><strong>Interactive exploration</strong> using filters for year, month, site, and KPI</li>
-        <li><strong>Decision-support value</strong> by surfacing performance drivers and priority problem areas</li>
-      </ul>
-
-      <p class="muted">
-        This project demonstrates how business KPI reporting can be turned into an interactive decision-support
-        dashboard that combines metric visibility, comparative analysis, and executive usability.
+      <h2>5) Results & Delivery</h2>
+      <p>
+        The complete solution — dashboard, leadership user guide, and technical maintenance manual — was
+        delivered to Bob Kinion, Director of Operations, in May 2026 as the BAN 710 capstone final deliverable.
       </p>
+
+      <table class="outcome-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Before</th>
+            <th>After</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Time to answer KPI attribution question</td>
+            <td>Hours — manual spreadsheet work</td>
+            <td class="good">Under 30 seconds</td>
+          </tr>
+          <tr>
+            <td>Spreadsheets opened per monthly review</td>
+            <td>Multiple</td>
+            <td class="good">One</td>
+          </tr>
+          <tr>
+            <td>Site-level visibility for leadership</td>
+            <td>Aggregated percentages only</td>
+            <td class="good">All 24 sites, all 5 KPIs</td>
+          </tr>
+          <tr>
+            <td>Volume weighting in roll-ups</td>
+            <td>Not applied</td>
+            <td class="good">Applied at every org level</td>
+          </tr>
+          <tr>
+            <td>KPI logic accessible to data team</td>
+            <td>Embedded in analyst knowledge</td>
+            <td class="good">20+ documented DAX measures</td>
+          </tr>
+          <tr>
+            <td>Dashboard pages</td>
+            <td>0</td>
+            <td class="good">7</td>
+          </tr>
+          <tr>
+            <td>Calculation errors at final QA</td>
+            <td>—</td>
+            <td class="good">Zero</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
   </main>
