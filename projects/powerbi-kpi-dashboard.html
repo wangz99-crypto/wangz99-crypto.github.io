@@ -62,6 +62,32 @@
     }
     .achievements li { font-size: 0.93rem; color: rgba(0,0,0,0.72); }
 
+    /* ── my role ── */
+    .my-role {
+      margin-top: 20px;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: 12px;
+      padding: 14px 18px;
+      background: #fff;
+    }
+    .my-role-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(0,0,0,0.40);
+      margin-bottom: 8px;
+    }
+    .my-role ul {
+      margin: 0;
+      padding-left: 18px;
+      columns: 2;
+      column-gap: 24px;
+      line-height: 1.85;
+    }
+    .my-role li { font-size: 0.93rem; color: rgba(0,0,0,0.72); break-inside: avoid; }
+    @media (max-width: 600px) { .my-role ul { columns: 1; } }
+
     /* ── project meta row ── */
     .project-meta {
       display: flex;
@@ -362,6 +388,18 @@
         </div>
       </div>
 
+      <div class="my-role">
+        <div class="my-role-title">My Role</div>
+        <ul>
+          <li>Led dashboard architecture and data modeling</li>
+          <li>Developed Power Query transformation pipelines</li>
+          <li>Implemented 20+ DAX measures</li>
+          <li>Designed executive reporting experience</li>
+          <li>Performed end-to-end validation across 24 manufacturing sites</li>
+          <li>Delivered technical documentation and user guide</li>
+        </ul>
+      </div>
+
       <div class="achievements">
         <div class="achievements-title">Key Achievements</div>
         <ul>
@@ -409,8 +447,7 @@
         </li>
       </ul>
       <p>
-        The stated requirement: <strong>identify which site is driving a KPI miss and by how much,
-        in under 30 seconds, without manual spreadsheet work.</strong>
+        The business objective was clear: <strong>identify which site is driving a KPI miss — and by how much — in under 30 seconds, without manual spreadsheet work.</strong>
       </p>
     </section>
 
@@ -447,72 +484,6 @@
           at SBU filter level — correct values at site level, wrong values at roll-up — with no error raised.
         </li>
       </ul>
-    </section>
-
-    <hr class="section-divider" />
-
-    <!-- ══════════════════════════════
-         TECHNOLOGY STACK
-    ══════════════════════════════ -->
-    <section>
-      <h2>Technology Stack</h2>
-      <div class="tech-bar">
-        <span class="tech-pill">Power BI</span>
-        <span class="tech-pill">DAX</span>
-        <span class="tech-pill">Power Query</span>
-        <span class="tech-pill">Star Schema</span>
-        <span class="tech-pill">Executive BI</span>
-      </div>
-      <div class="stack-section">
-        <div class="stack-card">
-          <div class="stack-label">Visualization</div>
-          <div class="stack-tags">
-            <span class="stag">Waterfall Chart</span>
-            <span class="stag">Hit / Miss Heatmap</span>
-            <span class="stag">Cascading Slicers</span>
-          </div>
-        </div>
-        <div class="stack-card">
-          <div class="stack-label">Computation</div>
-          <div class="stack-tags">
-            <span class="stag">ALLEXCEPT</span>
-            <span class="stag">REMOVEFILTERS</span>
-            <span class="stag">CALCULATE</span>
-          </div>
-        </div>
-        <div class="stack-card">
-          <div class="stack-label">Data Transformation</div>
-          <div class="stack-tags">
-            <span class="stag">Null Handling</span>
-            <span class="stag">Type Coercion</span>
-            <span class="stag">Name Standardization</span>
-          </div>
-        </div>
-        <div class="stack-card">
-          <div class="stack-label">Data Modeling</div>
-          <div class="stack-tags">
-            <span class="stag">Dimensional Modeling</span>
-            <span class="stag">Single-Direction Relationships</span>
-            <span class="stag">Date Dimension</span>
-          </div>
-        </div>
-        <div class="stack-card">
-          <div class="stack-label">Analytics Patterns</div>
-          <div class="stack-tags">
-            <span class="stag">Weighted Roll-Up</span>
-            <span class="stag">Leave-One-Out Attribution</span>
-            <span class="stag">Cascading Hierarchy Filters</span>
-          </div>
-        </div>
-        <div class="stack-card">
-          <div class="stack-label">Domain</div>
-          <div class="stack-tags">
-            <span class="stag">SPQDC KPI Framework</span>
-            <span class="stag">Manufacturing Operations</span>
-            <span class="stag">Multi-Level Org Hierarchy</span>
-          </div>
-        </div>
-      </div>
     </section>
 
     <hr class="section-divider" />
