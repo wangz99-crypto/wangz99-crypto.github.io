@@ -3,17 +3,110 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Corporate KPI Dashboard | Zhe Wang</title>
+  <title>Manufacturing Executive KPI Dashboard | Zhe Wang</title>
   <link rel="stylesheet" href="../styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 
   <style>
+    /* ── hero stat boxes ── */
+    .stat-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0 0;
+    }
+    .stat-box {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 12px;
+      padding: 14px 22px;
+      text-align: center;
+      min-width: 110px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .stat-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 0.76rem;
+      color: rgba(0,0,0,0.48);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── tech stack grid ── */
+    .stack-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .stack-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: #fafafa;
+    }
+    .stack-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(0,0,0,0.42);
+      margin-bottom: 8px;
+    }
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.06);
+      font-size: 0.84rem;
+      color: rgba(0,0,0,0.70);
+    }
+
+    /* ── feature cards ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .feature-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+    }
+    .feature-card h4 { margin: 0 0 7px; font-size: 0.95rem; }
+    .feature-card p {
+      margin: 0;
+      font-size: 0.89rem;
+      color: rgba(0,0,0,0.58);
+      line-height: 1.5;
+    }
+
+    /* ── mermaid diagram container ── */
+    .diagram-wrap {
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 20px;
+      background: #fafafa;
+      margin-top: 14px;
+      overflow-x: auto;
+    }
+
+    /* ── gallery ── */
     .etl-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 16px;
       margin-top: 12px;
     }
-
     .etl-card {
       border: 1px solid rgba(0,0,0,0.08);
       border-radius: 14px;
@@ -21,122 +114,92 @@
       background: #fff;
       box-shadow: 0 4px 18px rgba(0,0,0,0.04);
     }
-
     .etl-card img {
       width: 100%;
-      height: 250px;
+      height: 240px;
       object-fit: contain;
       border-radius: 10px;
       background: #fafafa;
       cursor: zoom-in;
       display: block;
     }
+    .etl-title { margin: 10px 0 4px; font-size: 0.97rem; font-weight: 700; }
+    .etl-caption { margin: 0; color: rgba(0,0,0,0.58); font-size: 0.88rem; line-height: 1.4; }
 
-    .etl-title {
-      margin: 10px 0 4px;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .etl-caption {
-      margin: 0;
-      color: rgba(0,0,0,0.62);
-      font-size: 0.95rem;
-      line-height: 1.35;
-    }
-
-    .section-divider {
-      margin: 22px 0;
-      border: 0;
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .mini-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .mini-tag {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,0.05);
-      font-size: 0.9rem;
-      color: rgba(0,0,0,0.7);
-    }
-
+    /* ── outcome table ── */
     .outcome-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 14px;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
     }
-
     .outcome-table th,
-    .outcome-table td {
-      padding: 9px 12px;
-      border: 1px solid rgba(0,0,0,0.1);
-      text-align: left;
-    }
+    .outcome-table td { padding: 9px 12px; border: 1px solid rgba(0,0,0,0.1); text-align: left; }
+    .outcome-table th { background: #f5f5f5; font-weight: 700; }
+    .outcome-table td:first-child { font-weight: 600; }
+    .outcome-table .good { color: #2e7d32; font-weight: 600; }
 
-    .outcome-table th {
-      background: #f5f5f5;
+    /* ── deep-dive blocks ── */
+    .deep-block {
+      background: #f6f8fa;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-left: 3px solid #111;
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    .deep-block h4 {
+      margin: 0 0 8px;
+      font-size: 0.88rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(0,0,0,0.60);
+    }
+    .deep-block ul {
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(0,0,0,0.68);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+    .deep-block code {
+      background: rgba(0,0,0,0.07);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.88em;
     }
 
-    .outcome-table td:first-child {
-      font-weight: 600;
+    /* ── misc ── */
+    .section-divider { margin: 28px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.08); }
+    .mini-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .mini-tag {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.05);
+      font-size: 0.88rem;
+      color: rgba(0,0,0,0.62);
     }
 
-    .outcome-table .good {
-      color: #2e7d32;
-      font-weight: 600;
-    }
-
+    /* ── lightbox ── */
     .lb {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(0,0,0,0.88);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      padding: 24px; z-index: 9999;
     }
-
-    .lb.show {
-      display: flex;
-    }
-
+    .lb.show { display: flex; }
     .lb-inner {
-      max-width: 92vw;
-      max-height: 86vh;
-      width: auto;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+      max-width: 92vw; max-height: 86vh;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
     }
-
     .lb-inner img {
-      max-width: 92vw;
-      max-height: 86vh;
-      width: auto;
-      height: auto;
-      display: block;
-      border-radius: 10px;
-      background: #111;
+      max-width: 92vw; max-height: 86vh;
+      display: block; border-radius: 10px; background: #111;
     }
-
-    .lb-hint {
-      text-align: center;
-      color: rgba(255,255,255,0.78);
-      font-size: 0.95rem;
-      user-select: none;
-    }
+    .lb-hint { text-align: center; color: rgba(255,255,255,0.72); font-size: 0.93rem; user-select: none; }
   </style>
 </head>
 
@@ -152,128 +215,320 @@
     </nav>
 
     <div class="page-hero">
-      <h1>📊 Corporate KPI Dashboard — GD-OTS</h1>
+      <h1>📊 Manufacturing Executive KPI Dashboard</h1>
       <p class="subtitle muted">
-        Seven-page Power BI dashboard built for General Dynamics Ordnance and Tactical Systems
-        as a University of Dayton BAN 710 Business Analytics Capstone (Spring 2026). Delivers
-        30-second KPI attribution across 24 manufacturing sites using weighted roll-ups,
-        leave-one-out impact analysis, and 20+ validated DAX measures.
+        A seven-page Power BI solution that replaced hours of manual Excel reporting with
+        sub-30-second KPI attribution across a 24-site manufacturing enterprise —
+        featuring weighted roll-up analytics, leave-one-out site impact analysis,
+        and a fully validated star schema with 20+ DAX measures.
       </p>
 
       <div class="mini-tags">
         <span class="mini-tag">Power BI</span>
         <span class="mini-tag">DAX</span>
-        <span class="mini-tag">SPQDC Framework</span>
-        <span class="mini-tag">Weighted Roll-Up</span>
-        <span class="mini-tag">Waterfall Analysis</span>
-        <span class="mini-tag">Executive Reporting</span>
-        <span class="mini-tag">Data Modeling</span>
         <span class="mini-tag">Power Query</span>
+        <span class="mini-tag">Star Schema</span>
+        <span class="mini-tag">Weighted Attribution</span>
+        <span class="mini-tag">Waterfall Analysis</span>
+        <span class="mini-tag">KPI Framework</span>
+        <span class="mini-tag">Executive Reporting</span>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-num">&lt; 30s</div>
+          <div class="stat-label">KPI Attribution</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">24</div>
+          <div class="stat-label">Sites Monitored</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">DAX Measures</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">0</div>
+          <div class="stat-label">QA Errors</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Dashboard Pages</div>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="container">
 
+    <!-- ══════════════════════════════
+         BUSINESS PROBLEM
+    ══════════════════════════════ -->
     <section>
-      <h2>1) Background & Problem</h2>
+      <h2>Business Problem</h2>
       <p>
-        General Dynamics Ordnance and Tactical Systems (GD-OTS) operates <strong>24 manufacturing sites</strong>
-        organized into a four-level hierarchy — sites → subgroups → Strategic Business Units → corporate.
-        Monthly performance reviews track five KPI categories collectively known as <strong>SPQDC</strong>:
-        Safety, People, Quality, Delivery, and Cost.
+        A multi-site manufacturing enterprise with <strong>24 plants</strong> organized across a four-level
+        hierarchy — sites → subgroups → strategic business units → corporate — ran monthly operational reviews
+        tracking five KPI categories: Safety, People, Quality, Delivery, and Cost (the <strong>SPQDC framework</strong>).
+        All reporting was manual and Excel-based, with two structural gaps:
       </p>
-
+      <ul class="bullets">
+        <li>
+          <strong>No attribution.</strong> Reports showed company-level percentages only.
+          When a KPI missed target, identifying <em>which site caused it and by how much</em>
+          required manually pulling and reconciling spreadsheets across multiple locations — consuming
+          significant time during every monthly review cycle.
+        </li>
+        <li>
+          <strong>No volume weighting.</strong> A site handling 100 purchase-order lines and one
+          handling 10,000 were treated identically in percentage terms. High-volume misses were invisible
+          alongside small-site outliers — misleading the prioritization of operational interventions.
+        </li>
+      </ul>
       <p>
-        Prior to this project, all SPQDC reporting was produced manually in Excel. Performance was shown as
-        flat company-level percentages with no visibility into <em>which site</em> was responsible for a KPI
-        miss or <em>by how much</em>. Root-causing a miss required pulling and reconciling multiple spreadsheets
-        — a process that consumed significant time during monthly reviews.
-      </p>
-
-      <p>
-        The requirement set at kickoff was precise: <strong>identify which site is driving a KPI miss and by
-        how much, in under 30 seconds, without manual spreadsheet work.</strong>
+        The stated requirement: <strong>identify which site is driving a KPI miss and by how much,
+        in under 30 seconds, without manual spreadsheet work.</strong>
       </p>
     </section>
 
     <hr class="section-divider" />
 
+    <!-- ══════════════════════════════
+         SOLUTION
+    ══════════════════════════════ -->
     <section>
-      <h2>2) Methodology</h2>
-
-      <h3>2.1 Weighted Roll-Up (No Averaging of Averages)</h3>
+      <h2>Solution</h2>
       <p>
-        All company-level and SBU-level figures aggregate raw numerators and denominators across sites first,
-        then compute one weighted result. Simple percentage averaging gives equal weight to a site handling
-        100 lines and one handling 10,000 — the weighted approach ensures that site scale is correctly
-        reflected at every organizational level. This distinction changed which sites appeared as highest-impact
-        contributors during development validation.
+        I designed and delivered a seven-page Power BI dashboard that replaced the manual Excel process end-to-end.
+        Four core design decisions shaped the architecture:
       </p>
-
-      <h3>2.2 Leave-One-Out Site Impact Logic</h3>
-      <p>
-        The KPI Performance Drivers page computes each site's <em>marginal impact</em> on the company total.
-        For every site, the dashboard calculates the full company KPI, then removes that site's contribution
-        using <code>ALLEXCEPT</code> / <code>REMOVEFILTERS</code> in DAX, and returns the difference.
-        Green bars in the waterfall chart represent sites that move the KPI toward target; red bars pull it away.
-        This directly answers the attribution question without any manual consolidation.
-      </p>
-
-      <h3>2.3 Validation Framework</h3>
-      <p>
-        January 2025 was selected as the baseline validation month — the first period with complete data across
-        all 24 sites. Every DAX measure was validated against the client's existing Excel figures at the site,
-        subgroup, SBU, and corporate levels. The final QA check produced <strong>zero calculation errors</strong>
-        before the dashboard was delivered.
-      </p>
-
-      <h3>2.4 Data Governance</h3>
       <ul class="bullets">
-        <li>Placeholder values (–1 for not-applicable) converted to null in Power Query before any measure runs</li>
-        <li>Site names standardized across all source files to prevent silent join failures</li>
-        <li>All model relationships set to single-direction one-to-many (bidirectional filtering removed after
-          it produced wrong values at SBU-level filter contexts)</li>
-        <li>GD-OTS data team can load new monthly files independently — no preprocessing or analyst involvement required</li>
+        <li>
+          <strong>Aggregate raw numerators and denominators — never average percentages.</strong>
+          Every roll-up at every organizational level reflects actual site scale.
+          This distinction materially changed which sites ranked as highest-impact contributors.
+        </li>
+        <li>
+          <strong>Leave-one-out attribution on a dedicated Drivers page.</strong>
+          Each site's marginal contribution to the company KPI is computed simultaneously and
+          rendered as a waterfall chart — answerable in under 30 seconds without any manual work.
+        </li>
+        <li>
+          <strong>Self-service monthly refresh.</strong>
+          The data team drops new Excel files into a single folder and refreshes.
+          No preprocessing, no analyst dependency, no structural changes needed.
+        </li>
+        <li>
+          <strong>Single-direction model relationships throughout.</strong>
+          Bidirectional filtering was tested and removed after it produced silent miscalculations
+          at SBU filter level — correct values at site level, wrong values at roll-up — with no error raised.
+        </li>
       </ul>
     </section>
 
     <hr class="section-divider" />
 
+    <!-- ══════════════════════════════
+         TECHNOLOGY STACK
+    ══════════════════════════════ -->
     <section>
-      <h2>3) Dashboard Architecture</h2>
-      <p>
-        The model follows a <strong>star schema</strong>: a central KPI fact table joined to dimension tables
-        for sites, months, targets, and KPI categories. Source data is loaded from five Excel files via six
-        Power Query queries that handle all cleaning before data enters the model.
-      </p>
-
-      <p>
-        All seven pages share a cascading filter panel — Year, Month, SBU, Group, Site — that updates every
-        visual simultaneously. Selecting an SBU automatically limits the available Group and Site options to
-        that unit's hierarchy.
-      </p>
-
-      <h3>Seven Dashboard Pages</h3>
-      <ul class="bullets">
-        <li><strong>Page 1 — Executive KPI Overview:</strong> Five scorecards (Safety, People, Quality, Delivery,
-          Cost) with sub-metric toggles, five monthly trend lines, and a site-level hit/miss heatmap across
-          all 24 sites and all five KPI categories.</li>
-        <li><strong>Page 2 — KPI Performance Drivers:</strong> Leave-one-out waterfall + ranked bar chart.
-          Select any SPQDC category; all visuals update to show each site's marginal impact on that KPI.</li>
-        <li><strong>Pages 3–7 — Individual KPI Drill-Downs:</strong> One page per SPQDC category. Each shows
-          a scorecard vs. target, historical trend chart, monthly trend vs. target line, and a site ranking chart.</li>
-      </ul>
+      <h2>Technology Stack</h2>
+      <div class="stack-section">
+        <div class="stack-card">
+          <div class="stack-label">Visualization</div>
+          <div class="stack-tags">
+            <span class="stag">Power BI Desktop</span>
+            <span class="stag">Waterfall Chart</span>
+            <span class="stag">Hit / Miss Heatmap</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-label">Computation</div>
+          <div class="stack-tags">
+            <span class="stag">DAX</span>
+            <span class="stag">ALLEXCEPT</span>
+            <span class="stag">REMOVEFILTERS</span>
+            <span class="stag">CALCULATE</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-label">Data Transformation</div>
+          <div class="stack-tags">
+            <span class="stag">Power Query (M)</span>
+            <span class="stag">Null Handling</span>
+            <span class="stag">Type Coercion</span>
+            <span class="stag">Name Standardization</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-label">Data Modeling</div>
+          <div class="stack-tags">
+            <span class="stag">Star Schema</span>
+            <span class="stag">Dimensional Modeling</span>
+            <span class="stag">Single-Direction Relationships</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-label">Analytics Patterns</div>
+          <div class="stack-tags">
+            <span class="stag">Weighted Roll-Up</span>
+            <span class="stag">Leave-One-Out Attribution</span>
+            <span class="stag">Cascading Hierarchy Filters</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-label">Domain</div>
+          <div class="stack-tags">
+            <span class="stag">SPQDC KPI Framework</span>
+            <span class="stag">Manufacturing Operations</span>
+            <span class="stag">Multi-Level Org Hierarchy</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <hr class="section-divider" />
 
+    <!-- ══════════════════════════════
+         SYSTEM ARCHITECTURE
+    ══════════════════════════════ -->
     <section>
-      <h2>4) Dashboard Gallery (Click to zoom)</h2>
-      <p class="muted">
-        All seven pages of the delivered dashboard, covering the executive overview, performance driver analysis,
-        and individual drill-downs for each SPQDC category.
+      <h2>System Architecture</h2>
+      <p>
+        Five Excel source files are loaded through <strong>six Power Query queries</strong> that clean,
+        normalize, and type all values before anything enters the model. The clean data lands in a
+        <strong>star schema</strong> — one fact table joined to four dimension tables — and 20+ DAX
+        measures compute all KPIs dynamically at query time across seven dashboard pages.
       </p>
+
+      <div class="diagram-wrap">
+        <div class="mermaid">
+flowchart LR
+    subgraph SRC ["📂 Source Layer (5 Excel files)"]
+        direction TB
+        s1["KPI Data"]
+        s2["Site Goals"]
+        s3["DimSite"]
+        s4["DimMonth"]
+    end
+
+    subgraph PQ ["⚙️ Power Query (6 queries)"]
+        direction TB
+        p1["-1 → null (N/A cleanup)"]
+        p2["Site name standardization"]
+        p3["Date key normalization"]
+    end
+
+    subgraph STAR ["🗄️ Star Schema"]
+        direction TB
+        F[("FactKPI")]
+        D1["DimSite"]
+        D2["DimMonth"]
+        D3["KPI Targets"]
+        D4["KPI Category"]
+    end
+
+    subgraph DAX ["📐 DAX Layer (20+ measures)"]
+        direction TB
+        dx1["Weighted Roll-Up"]
+        dx2["Leave-One-Out Attribution"]
+        dx3["Trend & YoY Measures"]
+    end
+
+    subgraph PAGES ["📊 7 Dashboard Pages"]
+        direction TB
+        pg1["Executive Overview"]
+        pg2["Performance Drivers"]
+        pg3["SPQDC Drill-Downs ×5"]
+    end
+
+    SRC --> PQ --> STAR --> DAX --> PAGES
+        </div>
+      </div>
+      <p style="margin-top:10px; font-size:0.88rem; color:rgba(0,0,0,0.45);">
+        All relationships are single-direction one-to-many. Cascading filters (Year → Month → SBU → Group → Site)
+        update every visual across all seven pages simultaneously.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ══════════════════════════════
+         KEY FEATURES
+    ══════════════════════════════ -->
+    <section>
+      <h2>Key Features — 7 Dashboard Pages</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>Page 1 &nbsp;·&nbsp; Executive KPI Overview</h4>
+          <p>
+            Five scorecards — one per SPQDC category — with sub-metric toggles (Hourly / Salaried,
+            Scrap $ / Scrap % of Sales, OTD % / Lines Missed, Efficiency % / Hours Over).
+            Five monthly trend lines. A site-level hit/miss heatmap across all 24 sites and all five
+            KPIs, dynamically filtered by year and month.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h4>Page 2 &nbsp;·&nbsp; KPI Performance Drivers</h4>
+          <p>
+            The core attribution engine. Select any SPQDC category; a waterfall chart shows each
+            site's marginal contribution (green = toward target, red = away from target) and a ranked
+            bar chart surfaces the highest-impact sites instantly. Root-cause attribution in under 30 seconds.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h4>Page 3 &nbsp;·&nbsp; Safety</h4>
+          <p>
+            Recordable Injury Rate (incidents × 200,000 ÷ exposure hours) vs. target.
+            Year-over-year historical trend, monthly trend vs. target line, and site ranking by injury rate.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h4>Page 4 &nbsp;·&nbsp; People</h4>
+          <p>
+            Monthly employee retention with Hourly / Salaried toggle. Roll-ups weighted by headcount —
+            not averaged. Historical trend and site ranking.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h4>Page 5 &nbsp;·&nbsp; Quality</h4>
+          <p>
+            Scrap $ and Scrap % of Sales toggle. Monthly scrap trend vs. target and top sites by
+            scrap dollar value — translating quality metrics into direct cost-of-waste language.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h4>Page 6 &nbsp;·&nbsp; Delivery</h4>
+          <p>
+            On-Time Delivery % and Lines Missed per 100 toggle. Volume-weighted OTD trend vs.
+            target and site ranking — high-volume site misses are not masked by percentage-only views.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h4>Page 7 &nbsp;·&nbsp; Cost</h4>
+          <p>
+            Labor Efficiency % (earned hours ÷ actual hours) vs. target. Historical trend, monthly
+            trend, and Hours Over per 100 toggle for operations-level cost visibility.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ══════════════════════════════
+         GALLERY
+    ══════════════════════════════ -->
+    <section>
+      <h2>Dashboard Gallery</h2>
+      <p class="muted">Click any screenshot to zoom.</p>
 
       <div class="etl-grid">
 
@@ -284,8 +539,8 @@
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 1 — Executive KPI Overview</div>
           <p class="etl-caption">
-            Five KPI scorecards with sub-metric toggles, monthly trend lines, and a hit/miss heatmap
-            across all 24 sites for the selected period.
+            Five KPI scorecards with sub-metric toggles, monthly trend lines, and the
+            site hit/miss heatmap for the selected period.
           </p>
         </div>
 
@@ -296,8 +551,8 @@
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 2 — KPI Performance Drivers</div>
           <p class="etl-caption">
-            Leave-one-out waterfall and ranked site bar chart. Answers "which site is driving this KPI miss
-            and by how much" in under 30 seconds for any selected SPQDC category.
+            Leave-one-out waterfall and ranked bar chart — each site's marginal impact on
+            the selected KPI, answerable in under 30 seconds.
           </p>
         </div>
 
@@ -306,10 +561,9 @@
                alt="Safety Drill-Down"
                data-full="../assets/powerbi-kpi-dashboard/03_safety.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Page 3 — Safety Drill-Down</div>
+          <div class="etl-title">Page 3 — Safety</div>
           <p class="etl-caption">
-            Recordable Injury Rate (injuries × 200,000 / exposure hours) vs. target, with historical trend
-            and site ranking by highest injury rate.
+            Recordable Injury Rate vs. target, year-over-year trend, and site ranking.
           </p>
         </div>
 
@@ -318,10 +572,9 @@
                alt="People Drill-Down"
                data-full="../assets/powerbi-kpi-dashboard/04_people.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Page 4 — People Drill-Down</div>
+          <div class="etl-title">Page 4 — People</div>
           <p class="etl-caption">
-            Monthly employee retention rate with Hourly / Salaried toggle, historical trend, and site ranking.
-            Roll-ups weighted by headcount, not averaged.
+            Retention rate with Hourly / Salaried toggle, headcount-weighted roll-ups, and site ranking.
           </p>
         </div>
 
@@ -330,10 +583,9 @@
                alt="Quality Drill-Down"
                data-full="../assets/powerbi-kpi-dashboard/05_quality.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Page 5 — Quality Drill-Down</div>
+          <div class="etl-title">Page 5 — Quality</div>
           <p class="etl-caption">
-            Scrap $ and Scrap % of Sales toggle. Monthly scrap trend vs. target and top sites by scrap dollar
-            value — directly actionable cost-of-waste visibility.
+            Scrap cost and Scrap % of Sales, monthly trend vs. target, and top sites by scrap value.
           </p>
         </div>
 
@@ -342,10 +594,9 @@
                alt="Delivery Drill-Down"
                data-full="../assets/powerbi-kpi-dashboard/06_delivery.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Page 6 — Delivery Drill-Down</div>
+          <div class="etl-title">Page 6 — Delivery</div>
           <p class="etl-caption">
-            On-Time Delivery % and Lines Missed per 100 toggle. OTD trend vs. target and top sites by
-            OTD — volume-weighted so a large-site miss isn't masked by percentage alone.
+            OTD % and Lines Missed per 100, volume-weighted trend vs. target, and site ranking.
           </p>
         </div>
 
@@ -354,10 +605,9 @@
                alt="Cost Drill-Down"
                data-full="../assets/powerbi-kpi-dashboard/07_cost.png"
                onclick="openLightbox(this.dataset.full)" />
-          <div class="etl-title">Page 7 — Cost Drill-Down</div>
+          <div class="etl-title">Page 7 — Cost</div>
           <p class="etl-caption">
-            Labor Efficiency % (earned hours / actual hours) vs. target, with historical trend and top sites
-            by labor efficiency. Hours Over per 100 toggle available.
+            Labor Efficiency % vs. target, historical trend, and Hours Over per 100 view.
           </p>
         </div>
 
@@ -366,12 +616,11 @@
 
     <hr class="section-divider" />
 
+    <!-- ══════════════════════════════
+         BUSINESS IMPACT
+    ══════════════════════════════ -->
     <section>
-      <h2>5) Results & Delivery</h2>
-      <p>
-        The complete solution — dashboard, leadership user guide, and technical maintenance manual — was
-        delivered to Bob Kinion, Director of Operations, in May 2026 as the BAN 710 capstone final deliverable.
-      </p>
+      <h2>Business Impact</h2>
 
       <table class="outcome-table">
         <thead>
@@ -383,42 +632,102 @@
         </thead>
         <tbody>
           <tr>
-            <td>Time to answer KPI attribution question</td>
-            <td>Hours — manual spreadsheet work</td>
+            <td>KPI attribution — which site, by how much</td>
+            <td>Hours of manual spreadsheet work</td>
             <td class="good">Under 30 seconds</td>
           </tr>
           <tr>
-            <td>Spreadsheets opened per monthly review</td>
-            <td>Multiple</td>
-            <td class="good">One</td>
+            <td>Files opened per monthly review</td>
+            <td>Multiple spreadsheets</td>
+            <td class="good">One dashboard</td>
           </tr>
           <tr>
             <td>Site-level visibility for leadership</td>
-            <td>Aggregated percentages only</td>
-            <td class="good">All 24 sites, all 5 KPIs</td>
+            <td>Aggregated % only</td>
+            <td class="good">All 24 sites across all 5 KPIs</td>
           </tr>
           <tr>
-            <td>Volume weighting in roll-ups</td>
-            <td>Not applied</td>
+            <td>Volume weighting in KPI roll-ups</td>
+            <td>Not applied — all sites treated equally</td>
             <td class="good">Applied at every org level</td>
           </tr>
           <tr>
-            <td>KPI logic accessible to data team</td>
+            <td>KPI calculation logic</td>
             <td>Embedded in analyst knowledge</td>
-            <td class="good">20+ documented DAX measures</td>
+            <td class="good">20+ documented, validated DAX measures</td>
           </tr>
           <tr>
             <td>Dashboard pages</td>
             <td>0</td>
-            <td class="good">7</td>
+            <td class="good">7 — overview, drivers, 5× SPQDC drill-downs</td>
           </tr>
           <tr>
             <td>Calculation errors at final QA</td>
             <td>—</td>
-            <td class="good">Zero</td>
+            <td class="good">Zero — validated across all 24 sites × 4 org levels</td>
           </tr>
         </tbody>
       </table>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ══════════════════════════════
+         TECHNICAL DEEP DIVE
+    ══════════════════════════════ -->
+    <section>
+      <h2>Technical Deep Dive</h2>
+      <p class="muted">Key engineering decisions — for technical interviews and code reviews.</p>
+
+      <div class="deep-block">
+        <h4>Weighted Roll-Up — Why Averaging Percentages Breaks</h4>
+        <ul>
+          <li>All aggregate KPIs sum <strong>raw numerators</strong> and <strong>raw denominators</strong> across sites first, then compute one result — never averaging site-level percentages.</li>
+          <li>Concrete example: Site A at 85% OTD on 10,000 lines, Site B at 70% OTD on 500 lines. Simple average = 77.5%. Weighted result = 84.3%. That 6.8-point gap changed the priority ranking of which sites needed intervention.</li>
+          <li>The weighted approach is implemented in DAX as raw-sum measures that recalculate correctly at any filter context — site, subgroup, SBU, or corporate.</li>
+        </ul>
+      </div>
+
+      <div class="deep-block">
+        <h4>Leave-One-Out Attribution — DAX Pattern</h4>
+        <ul>
+          <li>For each site: compute the company KPI with all sites included, then compute it again with that site removed using <code>ALLEXCEPT</code> / <code>REMOVEFILTERS</code>, return the difference.</li>
+          <li>This difference is the site's <em>marginal impact</em> on the corporate total.</li>
+          <li>Runs simultaneously for all 24 sites; results drive both the waterfall chart and the ranked bar chart on the Drivers page.</li>
+          <li>No pre-aggregation required — DAX filter context handles scope dynamically at query time.</li>
+        </ul>
+      </div>
+
+      <div class="deep-block">
+        <h4>Validation Framework — Cross-Level QA</h4>
+        <ul>
+          <li>January 2025 selected as the baseline validation period — first month with complete data across all 24 sites.</li>
+          <li>Every DAX measure validated against existing Excel source at <strong>site, subgroup, SBU, and corporate levels</strong> — not just the top-level roll-up.</li>
+          <li>Critical insight: a measure can be correct at site level and still return wrong values at SBU level due to filter context differences in Power BI. Cross-level validation catches this class of silent failure.</li>
+          <li>Final QA result: <strong>zero calculation errors</strong> across all KPIs, all 24 sites, all four organizational levels.</li>
+        </ul>
+      </div>
+
+      <div class="deep-block">
+        <h4>Power Query & Data Governance</h4>
+        <ul>
+          <li>Source files used <code>-1</code> as a "not applicable" sentinel. Converted to <code>null</code> in Power Query <em>before</em> any measure executes — prevents silent distortion in numerator/denominator sums.</li>
+          <li>Site names were inconsistent across source files. Mismatches caused sites to silently disappear from visuals (no error, no data) — resolved by standardizing all names in the Power Query step.</li>
+          <li>Bidirectional model relationships removed after discovery that they produced incorrect values at SBU-level filter contexts without raising any error message — a silent failure caught only by cross-level validation.</li>
+          <li>Sales field in source is cumulative YTD; Scrap % of Sales requires subtracting the prior-month YTD Sales to recover the correct period denominator.</li>
+        </ul>
+      </div>
+
+      <div class="deep-block">
+        <h4>KPI Formulas — Replicated Exactly from Operational Standards</h4>
+        <ul>
+          <li><strong>Safety:</strong> Recordable Injuries × 200,000 ÷ Total Exposure Hours</li>
+          <li><strong>People:</strong> Retained Employees ÷ Total Headcount (separate Hourly and Salaried measures; weighted by headcount at every roll-up level)</li>
+          <li><strong>Quality:</strong> Scrap $ by site and period; Scrap % of Sales = Scrap $ ÷ (Current YTD Sales − Prior YTD Sales) × 100</li>
+          <li><strong>Delivery:</strong> OTD % = On-Time Deliveries ÷ Total Deliveries; Lines Missed per 100 = Lines Missed ÷ Total Lines × 100</li>
+          <li><strong>Cost:</strong> Labor Efficiency = Earned Hours ÷ Actual Hours Worked</li>
+        </ul>
+      </div>
     </section>
 
   </main>
@@ -428,6 +737,7 @@
   </footer>
 
   <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { curve: 'basis' } });
     document.getElementById("y").textContent = new Date().getFullYear();
 
     function openLightbox(src) {
@@ -454,7 +764,7 @@
   <div id="lightbox" class="lb" onclick="closeLightbox()">
     <div class="lb-inner" onclick="event.stopPropagation()">
       <img id="lightbox-img" alt="Zoomed image">
-      <div class="lb-hint">Click outside the image (or press ESC) to close</div>
+      <div class="lb-hint">Click outside or press ESC to close</div>
     </div>
   </div>
 
