@@ -38,6 +38,30 @@
       letter-spacing: 0.05em;
     }
 
+    /* ── key achievements ── */
+    .achievements {
+      margin-top: 20px;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-left: 3px solid #111;
+      border-radius: 0 12px 12px 0;
+      padding: 14px 18px;
+      background: #fafafa;
+    }
+    .achievements-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(0,0,0,0.40);
+      margin-bottom: 8px;
+    }
+    .achievements ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.85;
+    }
+    .achievements li { font-size: 0.93rem; color: rgba(0,0,0,0.72); }
+
     /* ── tech stack grid ── */
     .stack-section {
       display: grid;
@@ -94,10 +118,18 @@
     .diagram-wrap {
       border: 1px solid rgba(0,0,0,0.08);
       border-radius: 12px;
-      padding: 20px;
+      padding: 24px 20px;
       background: #fafafa;
       margin-top: 14px;
       overflow-x: auto;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .diagram-wrap .mermaid {
+      width: 100%;
+      max-width: 560px;
     }
 
     /* ── gallery ── */
@@ -139,6 +171,33 @@
     .outcome-table td:first-child { font-weight: 600; }
     .outcome-table .good { color: #2e7d32; font-weight: 600; }
 
+    /* ── collapsible deep-dive ── */
+    details { margin-top: 0; }
+    details > summary {
+      cursor: pointer;
+      padding: 13px 16px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.97rem;
+      list-style: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    details > summary::-webkit-details-marker { display: none; }
+    details > summary .arrow { font-size: 0.75em; color: rgba(0,0,0,0.45); transition: transform 0.15s; }
+    details[open] > summary .arrow { transform: rotate(90deg); }
+    details[open] > summary { border-radius: 10px 10px 0 0; }
+    .details-body {
+      border: 1px solid rgba(0,0,0,0.09);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      padding: 16px;
+      background: #fff;
+    }
+
     /* ── deep-dive blocks ── */
     .deep-block {
       background: #f6f8fa;
@@ -148,6 +207,7 @@
       padding: 14px 16px;
       margin-top: 14px;
     }
+    .deep-block:first-child { margin-top: 0; }
     .deep-block h4 {
       margin: 0 0 8px;
       font-size: 0.88rem;
@@ -217,10 +277,10 @@
     <div class="page-hero">
       <h1>📊 Manufacturing Executive KPI Dashboard</h1>
       <p class="subtitle muted">
-        A seven-page Power BI solution that replaced hours of manual Excel reporting with
-        sub-30-second KPI attribution across a 24-site manufacturing enterprise —
-        featuring weighted roll-up analytics, leave-one-out site impact analysis,
-        and a fully validated star schema with 20+ DAX measures.
+        Designed and implemented a seven-page Power BI executive dashboard for a multi-site
+        manufacturing organization, replacing hours of manual Excel reporting with sub-30-second
+        KPI attribution across 24 facilities — using weighted roll-up analytics, leave-one-out
+        site impact analysis, and a validated star schema with 20+ DAX measures.
       </p>
 
       <div class="mini-tags">
@@ -255,6 +315,17 @@
           <div class="stat-num">7</div>
           <div class="stat-label">Dashboard Pages</div>
         </div>
+      </div>
+
+      <div class="achievements">
+        <div class="achievements-title">Key Achievements</div>
+        <ul>
+          <li>Built a 7-page executive Power BI dashboard for a 24-site manufacturing enterprise</li>
+          <li>Reduced KPI attribution time from hours of spreadsheet work to under 30 seconds</li>
+          <li>Implemented 20+ validated DAX measures with weighted roll-ups across all 4 org levels</li>
+          <li>Fixed a 6.8-point KPI error caused by averaging percentages — corrected via volume-weighted aggregation</li>
+          <li>Achieved zero calculation discrepancies during final QA across all 24 sites</li>
+        </ul>
       </div>
     </div>
   </header>
@@ -403,46 +474,12 @@
 
       <div class="diagram-wrap">
         <div class="mermaid">
-flowchart LR
-    subgraph SRC ["📂 Source Layer (5 Excel files)"]
-        direction TB
-        s1["KPI Data"]
-        s2["Site Goals"]
-        s3["DimSite"]
-        s4["DimMonth"]
-    end
-
-    subgraph PQ ["⚙️ Power Query (6 queries)"]
-        direction TB
-        p1["-1 → null (N/A cleanup)"]
-        p2["Site name standardization"]
-        p3["Date key normalization"]
-    end
-
-    subgraph STAR ["🗄️ Star Schema"]
-        direction TB
-        F[("FactKPI")]
-        D1["DimSite"]
-        D2["DimMonth"]
-        D3["KPI Targets"]
-        D4["KPI Category"]
-    end
-
-    subgraph DAX ["📐 DAX Layer (20+ measures)"]
-        direction TB
-        dx1["Weighted Roll-Up"]
-        dx2["Leave-One-Out Attribution"]
-        dx3["Trend & YoY Measures"]
-    end
-
-    subgraph PAGES ["📊 7 Dashboard Pages"]
-        direction TB
-        pg1["Executive Overview"]
-        pg2["Performance Drivers"]
-        pg3["SPQDC Drill-Downs ×5"]
-    end
-
-    SRC --> PQ --> STAR --> DAX --> PAGES
+flowchart TD
+    A["📂 5 Excel Source Files\nKPI Data · Site Goals · DimSite · DimMonth"]
+    --> B["⚙️ Power Query — 6 queries\n−1 → null  ·  Site name standardization  ·  Date key normalization"]
+    --> C["🗄️ Star Schema\nFactKPI  ·  DimSite  ·  DimMonth  ·  KPI Targets  ·  KPI Category"]
+    --> D["📐 DAX Layer — 20+ measures\nWeighted Roll-Up  ·  Leave-One-Out Attribution  ·  Trend & YoY"]
+    --> E["📊 7 Dashboard Pages\nExecutive Overview  ·  Performance Drivers  ·  5× SPQDC Drill-Downs"]
         </div>
       </div>
       <p style="margin-top:10px; font-size:0.88rem; color:rgba(0,0,0,0.45);">
@@ -538,10 +575,7 @@ flowchart LR
                data-full="../assets/powerbi-kpi-dashboard/01_overview.png"
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 1 — Executive KPI Overview</div>
-          <p class="etl-caption">
-            Five KPI scorecards with sub-metric toggles, monthly trend lines, and the
-            site hit/miss heatmap for the selected period.
-          </p>
+          <p class="etl-caption">Five scorecards with sub-metric toggles, monthly trend lines, and the site hit/miss heatmap.</p>
         </div>
 
         <div class="etl-card">
@@ -550,10 +584,7 @@ flowchart LR
                data-full="../assets/powerbi-kpi-dashboard/02_performance_drivers.png"
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 2 — KPI Performance Drivers</div>
-          <p class="etl-caption">
-            Leave-one-out waterfall and ranked bar chart — each site's marginal impact on
-            the selected KPI, answerable in under 30 seconds.
-          </p>
+          <p class="etl-caption">Leave-one-out waterfall showing each site's marginal KPI impact — attribution in under 30 seconds.</p>
         </div>
 
         <div class="etl-card">
@@ -562,9 +593,7 @@ flowchart LR
                data-full="../assets/powerbi-kpi-dashboard/03_safety.png"
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 3 — Safety</div>
-          <p class="etl-caption">
-            Recordable Injury Rate vs. target, year-over-year trend, and site ranking.
-          </p>
+          <p class="etl-caption">Recordable Injury Rate vs. target with historical trend and site ranking.</p>
         </div>
 
         <div class="etl-card">
@@ -573,9 +602,7 @@ flowchart LR
                data-full="../assets/powerbi-kpi-dashboard/04_people.png"
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 4 — People</div>
-          <p class="etl-caption">
-            Retention rate with Hourly / Salaried toggle, headcount-weighted roll-ups, and site ranking.
-          </p>
+          <p class="etl-caption">Retention rate with Hourly / Salaried toggle, headcount-weighted roll-ups, and site ranking.</p>
         </div>
 
         <div class="etl-card">
@@ -584,9 +611,7 @@ flowchart LR
                data-full="../assets/powerbi-kpi-dashboard/05_quality.png"
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 5 — Quality</div>
-          <p class="etl-caption">
-            Scrap cost and Scrap % of Sales, monthly trend vs. target, and top sites by scrap value.
-          </p>
+          <p class="etl-caption">Scrap cost and Scrap % of Sales trend vs. target with top sites ranked by scrap value.</p>
         </div>
 
         <div class="etl-card">
@@ -595,9 +620,7 @@ flowchart LR
                data-full="../assets/powerbi-kpi-dashboard/06_delivery.png"
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 6 — Delivery</div>
-          <p class="etl-caption">
-            OTD % and Lines Missed per 100, volume-weighted trend vs. target, and site ranking.
-          </p>
+          <p class="etl-caption">OTD % and Lines Missed per 100 with volume-weighted trend vs. target and site ranking.</p>
         </div>
 
         <div class="etl-card">
@@ -606,9 +629,7 @@ flowchart LR
                data-full="../assets/powerbi-kpi-dashboard/07_cost.png"
                onclick="openLightbox(this.dataset.full)" />
           <div class="etl-title">Page 7 — Cost</div>
-          <p class="etl-caption">
-            Labor Efficiency % vs. target, historical trend, and Hours Over per 100 view.
-          </p>
+          <p class="etl-caption">Labor Efficiency % vs. target, historical trend, and Hours Over per 100 view.</p>
         </div>
 
       </div>
@@ -673,61 +694,68 @@ flowchart LR
     <hr class="section-divider" />
 
     <!-- ══════════════════════════════
-         TECHNICAL DEEP DIVE
+         TECHNICAL DEEP DIVE (collapsible)
     ══════════════════════════════ -->
     <section>
-      <h2>Technical Deep Dive</h2>
-      <p class="muted">Key engineering decisions — for technical interviews and code reviews.</p>
+      <details>
+        <summary>
+          <span class="arrow">▶</span>
+          Technical Deep Dive — DAX patterns, validation framework, data governance
+        </summary>
+        <div class="details-body">
 
-      <div class="deep-block">
-        <h4>Weighted Roll-Up — Why Averaging Percentages Breaks</h4>
-        <ul>
-          <li>All aggregate KPIs sum <strong>raw numerators</strong> and <strong>raw denominators</strong> across sites first, then compute one result — never averaging site-level percentages.</li>
-          <li>Concrete example: Site A at 85% OTD on 10,000 lines, Site B at 70% OTD on 500 lines. Simple average = 77.5%. Weighted result = 84.3%. That 6.8-point gap changed the priority ranking of which sites needed intervention.</li>
-          <li>The weighted approach is implemented in DAX as raw-sum measures that recalculate correctly at any filter context — site, subgroup, SBU, or corporate.</li>
-        </ul>
-      </div>
+          <div class="deep-block">
+            <h4>Weighted Roll-Up — Why Averaging Percentages Breaks</h4>
+            <ul>
+              <li>All aggregate KPIs sum <strong>raw numerators</strong> and <strong>raw denominators</strong> across sites first, then compute one result — never averaging site-level percentages.</li>
+              <li>Concrete example: Site A at 85% OTD on 10,000 lines, Site B at 70% OTD on 500 lines. Simple average = 77.5%. Weighted result = 84.3%. That 6.8-point gap changed the priority ranking of which sites needed intervention.</li>
+              <li>Implemented in DAX as raw-sum measures that recalculate correctly at any filter context — site, subgroup, SBU, or corporate.</li>
+            </ul>
+          </div>
 
-      <div class="deep-block">
-        <h4>Leave-One-Out Attribution — DAX Pattern</h4>
-        <ul>
-          <li>For each site: compute the company KPI with all sites included, then compute it again with that site removed using <code>ALLEXCEPT</code> / <code>REMOVEFILTERS</code>, return the difference.</li>
-          <li>This difference is the site's <em>marginal impact</em> on the corporate total.</li>
-          <li>Runs simultaneously for all 24 sites; results drive both the waterfall chart and the ranked bar chart on the Drivers page.</li>
-          <li>No pre-aggregation required — DAX filter context handles scope dynamically at query time.</li>
-        </ul>
-      </div>
+          <div class="deep-block">
+            <h4>Leave-One-Out Attribution — DAX Pattern</h4>
+            <ul>
+              <li>For each site: compute the company KPI with all sites included, then compute it again with that site removed using <code>ALLEXCEPT</code> / <code>REMOVEFILTERS</code>, return the difference.</li>
+              <li>This difference is the site's <em>marginal impact</em> on the corporate total.</li>
+              <li>Runs simultaneously for all 24 sites; results drive both the waterfall chart and the ranked bar chart on the Drivers page.</li>
+              <li>No pre-aggregation required — DAX filter context handles scope dynamically at query time.</li>
+            </ul>
+          </div>
 
-      <div class="deep-block">
-        <h4>Validation Framework — Cross-Level QA</h4>
-        <ul>
-          <li>January 2025 selected as the baseline validation period — first month with complete data across all 24 sites.</li>
-          <li>Every DAX measure validated against existing Excel source at <strong>site, subgroup, SBU, and corporate levels</strong> — not just the top-level roll-up.</li>
-          <li>Critical insight: a measure can be correct at site level and still return wrong values at SBU level due to filter context differences in Power BI. Cross-level validation catches this class of silent failure.</li>
-          <li>Final QA result: <strong>zero calculation errors</strong> across all KPIs, all 24 sites, all four organizational levels.</li>
-        </ul>
-      </div>
+          <div class="deep-block">
+            <h4>Validation Framework — Cross-Level QA</h4>
+            <ul>
+              <li>January 2025 selected as the baseline validation period — first month with complete data across all 24 sites.</li>
+              <li>Every DAX measure validated against existing Excel source at <strong>site, subgroup, SBU, and corporate levels</strong> — not just the top-level roll-up.</li>
+              <li>Critical insight: a measure can be correct at site level and still return wrong values at SBU level due to filter context differences in Power BI. Cross-level validation catches this class of silent failure.</li>
+              <li>Final QA result: <strong>zero calculation errors</strong> across all KPIs, all 24 sites, all four organizational levels.</li>
+            </ul>
+          </div>
 
-      <div class="deep-block">
-        <h4>Power Query & Data Governance</h4>
-        <ul>
-          <li>Source files used <code>-1</code> as a "not applicable" sentinel. Converted to <code>null</code> in Power Query <em>before</em> any measure executes — prevents silent distortion in numerator/denominator sums.</li>
-          <li>Site names were inconsistent across source files. Mismatches caused sites to silently disappear from visuals (no error, no data) — resolved by standardizing all names in the Power Query step.</li>
-          <li>Bidirectional model relationships removed after discovery that they produced incorrect values at SBU-level filter contexts without raising any error message — a silent failure caught only by cross-level validation.</li>
-          <li>Sales field in source is cumulative YTD; Scrap % of Sales requires subtracting the prior-month YTD Sales to recover the correct period denominator.</li>
-        </ul>
-      </div>
+          <div class="deep-block">
+            <h4>Power Query & Data Governance</h4>
+            <ul>
+              <li>Source files used <code>-1</code> as a "not applicable" sentinel. Converted to <code>null</code> in Power Query <em>before</em> any measure executes — prevents silent distortion in numerator/denominator sums.</li>
+              <li>Site names were inconsistent across source files. Mismatches caused sites to silently disappear from visuals (no error, no data) — resolved by standardizing all names in the Power Query step.</li>
+              <li>Bidirectional model relationships removed after they produced incorrect values at SBU-level filter contexts without raising any error message — a silent failure caught only by cross-level validation.</li>
+              <li>Adjusted cumulative YTD sales into monthly period values to calculate accurate Scrap % of Sales figures.</li>
+            </ul>
+          </div>
 
-      <div class="deep-block">
-        <h4>KPI Formulas — Replicated Exactly from Operational Standards</h4>
-        <ul>
-          <li><strong>Safety:</strong> Recordable Injuries × 200,000 ÷ Total Exposure Hours</li>
-          <li><strong>People:</strong> Retained Employees ÷ Total Headcount (separate Hourly and Salaried measures; weighted by headcount at every roll-up level)</li>
-          <li><strong>Quality:</strong> Scrap $ by site and period; Scrap % of Sales = Scrap $ ÷ (Current YTD Sales − Prior YTD Sales) × 100</li>
-          <li><strong>Delivery:</strong> OTD % = On-Time Deliveries ÷ Total Deliveries; Lines Missed per 100 = Lines Missed ÷ Total Lines × 100</li>
-          <li><strong>Cost:</strong> Labor Efficiency = Earned Hours ÷ Actual Hours Worked</li>
-        </ul>
-      </div>
+          <div class="deep-block">
+            <h4>KPI Formulas — Replicated Exactly from Operational Standards</h4>
+            <ul>
+              <li><strong>Safety:</strong> Recordable Injuries × 200,000 ÷ Total Exposure Hours</li>
+              <li><strong>People:</strong> Retained Employees ÷ Total Headcount (separate Hourly and Salaried measures; weighted by headcount at every roll-up level)</li>
+              <li><strong>Quality:</strong> Scrap $ by site and period; Scrap % of Sales = Scrap $ ÷ (Current YTD Sales − Prior YTD Sales) × 100</li>
+              <li><strong>Delivery:</strong> OTD % = On-Time Deliveries ÷ Total Deliveries; Lines Missed per 100 = Lines Missed ÷ Total Lines × 100</li>
+              <li><strong>Cost:</strong> Labor Efficiency = Earned Hours ÷ Actual Hours Worked</li>
+            </ul>
+          </div>
+
+        </div>
+      </details>
     </section>
 
   </main>
