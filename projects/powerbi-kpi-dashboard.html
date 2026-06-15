@@ -62,6 +62,45 @@
     }
     .achievements li { font-size: 0.93rem; color: rgba(0,0,0,0.72); }
 
+    /* ── tech bar (top-level pills) ── */
+    .tech-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .tech-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* ── leadership outcome ── */
+    .leadership-outcome {
+      margin-top: 20px;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-left: 3px solid #111;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 18px;
+      background: #fafafa;
+    }
+    .leadership-outcome h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+    .leadership-outcome p {
+      margin: 0;
+      color: rgba(0,0,0,0.68);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
     /* ── tech stack grid ── */
     .stack-section {
       display: grid;
@@ -122,14 +161,6 @@
       background: #fafafa;
       margin-top: 14px;
       overflow-x: auto;
-      min-height: 320px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .diagram-wrap .mermaid {
-      width: 100%;
-      max-width: 560px;
     }
 
     /* ── gallery ── */
@@ -279,8 +310,8 @@
       <p class="subtitle muted">
         Designed and implemented a seven-page Power BI executive dashboard for a multi-site
         manufacturing organization, replacing hours of manual Excel reporting with sub-30-second
-        KPI attribution across 24 facilities — using weighted roll-up analytics, leave-one-out
-        site impact analysis, and a validated star schema with 20+ DAX measures.
+        KPI attribution and executive-ready performance visibility across 24 manufacturing facilities —
+        using weighted roll-up analytics, leave-one-out site impact analysis, and a validated star schema with 20+ DAX measures.
       </p>
 
       <div class="mini-tags">
@@ -322,7 +353,7 @@
         <ul>
           <li>Built a 7-page executive Power BI dashboard for a 24-site manufacturing enterprise</li>
           <li>Reduced KPI attribution time from hours of spreadsheet work to under 30 seconds</li>
-          <li>Implemented 20+ validated DAX measures with weighted roll-ups across all 4 org levels</li>
+          <li>Implemented 20+ validated DAX measures with weighted roll-ups across site, subgroup, SBU, and corporate levels</li>
           <li>Fixed a 6.8-point KPI error caused by averaging percentages — corrected via volume-weighted aggregation</li>
           <li>Achieved zero calculation discrepancies during final QA across all 24 sites</li>
         </ul>
@@ -351,9 +382,9 @@
           significant time during every monthly review cycle.
         </li>
         <li>
-          <strong>No volume weighting.</strong> A site handling 100 purchase-order lines and one
-          handling 10,000 were treated identically in percentage terms. High-volume misses were invisible
-          alongside small-site outliers — misleading the prioritization of operational interventions.
+          <strong>No volume-aware aggregation.</strong> A site handling 100 purchase-order lines and
+          another handling 10,000 were treated equally in percentage roll-ups, causing high-volume
+          operational issues to be masked by small-site outliers.
         </li>
       </ul>
       <p>
@@ -404,6 +435,13 @@
     ══════════════════════════════ -->
     <section>
       <h2>Technology Stack</h2>
+      <div class="tech-bar">
+        <span class="tech-pill">Power BI</span>
+        <span class="tech-pill">DAX</span>
+        <span class="tech-pill">Power Query</span>
+        <span class="tech-pill">Star Schema</span>
+        <span class="tech-pill">Power BI Service</span>
+      </div>
       <div class="stack-section">
         <div class="stack-card">
           <div class="stack-label">Visualization</div>
@@ -474,12 +512,8 @@
 
       <div class="diagram-wrap">
         <div class="mermaid">
-flowchart TD
-    A["📂 5 Excel Source Files\nKPI Data · Site Goals · DimSite · DimMonth"]
-    --> B["⚙️ Power Query — 6 queries\n−1 → null  ·  Site name standardization  ·  Date key normalization"]
-    --> C["🗄️ Star Schema\nFactKPI  ·  DimSite  ·  DimMonth  ·  KPI Targets  ·  KPI Category"]
-    --> D["📐 DAX Layer — 20+ measures\nWeighted Roll-Up  ·  Leave-One-Out Attribution  ·  Trend & YoY"]
-    --> E["📊 7 Dashboard Pages\nExecutive Overview  ·  Performance Drivers  ·  5× SPQDC Drill-Downs"]
+flowchart LR
+    A["📂 Excel Sources"] --> B["⚙️ Power Query\nCleaning"] --> C["🗄️ Star Schema"] --> D["📐 20+ DAX\nMeasures"] --> E["📊 7 Power BI\nDashboards"]
         </div>
       </div>
       <p style="margin-top:10px; font-size:0.88rem; color:rgba(0,0,0,0.45);">
@@ -689,6 +723,15 @@ flowchart TD
           </tr>
         </tbody>
       </table>
+
+      <div class="leadership-outcome">
+        <h3>Leadership Outcome</h3>
+        <p>
+          The dashboard enabled executives to identify which manufacturing site was driving KPI misses
+          and quantify its contribution in under 30 seconds, replacing a manual workflow that previously
+          required consolidating multiple spreadsheets across the organization.
+        </p>
+      </div>
     </section>
 
     <hr class="section-divider" />
